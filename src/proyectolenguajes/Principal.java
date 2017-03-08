@@ -5,7 +5,6 @@
  */
 package proyectolenguajes;
 
-import javax.speech.recognition.Recognizer;
 
 /**
  *
@@ -18,7 +17,6 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(this);
-        Recognizer();
     }
 
     /**
@@ -83,9 +81,5 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    Recognizer recognizer;
 
-    private void Recognizer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
