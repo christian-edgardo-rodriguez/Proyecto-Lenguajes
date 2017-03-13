@@ -5,21 +5,23 @@
  */
 package proyectolenguajes;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
+import java.sql.SQLException;import java.sql.Statement;
+;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Simulador de Voz");
         conectarBaseDatos();
         thread = new Hilo(this);
         thread.start();
@@ -47,13 +50,12 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jd_principal = new javax.swing.JDialog();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jd_crear = new javax.swing.JDialog();
-        jTextField6 = new javax.swing.JTextField();
         tf_telefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -65,71 +67,109 @@ public class Principal extends javax.swing.JFrame {
         tf_mail = new javax.swing.JTextField();
         cb_genero = new javax.swing.JComboBox();
         jButton3 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jd_buscar = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        tf_nombreBuscar = new javax.swing.JTextField();
+        tf_apellidoBuscar = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jd_bitacora = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_contactos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jt_bitacora = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jd_opcionesBuscar = new javax.swing.JDialog();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        tf_nombreBuscarOpciones = new javax.swing.JTextField();
+        tf_apellidoBuscarOpciones = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jd_telefono = new javax.swing.JDialog();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jd_mensaje = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel35 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jd_videollamada = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jl_labelWebcam = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jd_modificar = new javax.swing.JDialog();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tf_usuario = new javax.swing.JTextField();
         tf_contra = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         jd_principal.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(0, 0, 255));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("Contactos");
-        jd_principal.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 150, -1));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/tabla-iloveimg-resized.jpg"))); // NOI18N
+        jd_principal.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 140, 150));
 
-        jTextField3.setBackground(new java.awt.Color(0, 0, 255));
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setText("Llamar");
-        jd_principal.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 150, -1));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
+        jd_principal.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 140, 150));
 
-        jTextField4.setBackground(new java.awt.Color(0, 0, 255));
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("Mensajear");
-        jd_principal.getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 150, -1));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
+        jd_principal.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
 
-        jTextField5.setEditable(false);
-        jTextField5.setBackground(new java.awt.Color(0, 0, 225));
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("Historial");
-        jd_principal.getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 150, -1));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_principal.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/fondo2-iloveimg-resized.jpg"))); // NOI18N
-        jd_principal.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_principal.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_crear.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField6.setEditable(false);
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("Crear Contacto");
-        jd_crear.getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 110, -1));
-        jd_crear.getContentPane().add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 150, -1));
+        jd_crear.getContentPane().add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 150, -1));
 
         jLabel6.setText("Telefono");
-        jd_crear.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        jd_crear.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
         jLabel7.setText("Nombre");
-        jd_crear.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        jd_crear.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
 
         jLabel8.setText("Apellido");
-        jd_crear.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+        jd_crear.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
 
         jLabel9.setText("E-Mail");
-        jd_crear.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+        jd_crear.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
 
         jLabel10.setText("Genero");
-        jd_crear.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, -1));
-        jd_crear.getContentPane().add(tf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 150, -1));
-        jd_crear.getContentPane().add(tf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 150, -1));
-        jd_crear.getContentPane().add(tf_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 150, -1));
+        jd_crear.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, -1, -1));
+        jd_crear.getContentPane().add(tf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, -1));
+        jd_crear.getContentPane().add(tf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 150, -1));
+        jd_crear.getContentPane().add(tf_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 150, -1));
 
         cb_genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "F", "M" }));
-        jd_crear.getContentPane().add(cb_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 150, -1));
+        jd_crear.getContentPane().add(cb_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 150, -1));
 
         jButton3.setText("Crear");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -137,10 +177,191 @@ public class Principal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jd_crear.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 80, -1));
+        jd_crear.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/fondo2-iloveimg-resized.jpg"))); // NOI18N
-        jd_crear.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
+        jd_crear.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
+
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_crear.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_crear.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_buscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setText("Nombre");
+        jd_buscar.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
+
+        jLabel5.setText("Apellido");
+        jd_buscar.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
+        jd_buscar.getContentPane().add(tf_nombreBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 130, -1));
+        jd_buscar.getContentPane().add(tf_apellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 130, -1));
+
+        jButton2.setText("Buscar");
+        jd_buscar.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 100, 40));
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
+        jd_buscar.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jLabel18.setText("Apellido");
+        jd_buscar.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_buscar.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_bitacora.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jd_bitacoraWindowOpened(evt);
+            }
+        });
+        jd_bitacora.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jt_contactos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Número", "Nombre", "Apellido", "E-Mail", "Genero"
+            }
+        ));
+        jScrollPane1.setViewportView(jt_contactos);
+
+        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 350, 90));
+
+        jt_bitacora.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Acción"
+            }
+        ));
+        jScrollPane2.setViewportView(jt_bitacora);
+
+        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 350, 90));
+
+        jTextField1.setEditable(false);
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Contactos");
+        jd_bitacora.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 90, -1));
+
+        jTextField2.setEditable(false);
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("Bitacora");
+        jd_bitacora.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 90, -1));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_bitacora.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_bitacora.getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_opcionesBuscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/delete-iloveimg-resized.png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 140, 150));
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 140, 150));
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/telefono-iloveimg-resized.png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 140, 150));
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/modificar-iloveimg-resized.png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 140, 150));
+        jd_opcionesBuscar.getContentPane().add(tf_nombreBuscarOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 130, -1));
+        jd_opcionesBuscar.getContentPane().add(tf_apellidoBuscarOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 130, -1));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_opcionesBuscar.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_telefono.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-182655-iloveimg-resized.png"))); // NOI18N
+        jd_telefono.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_telefono.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_mensaje.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 340, 330));
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
+        jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
+
+        jButton4.setText("Mandar");
+        jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_mensaje.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_videollamada.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jd_videollamadaWindowOpened(evt);
+            }
+        });
+        jd_videollamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+
+        jd_videollamada.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 340, 380));
+
+        jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
+        jd_videollamada.getContentPane().add(jl_labelWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 640, 120, 70));
+
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/videocall-iloveimg-resized.png"))); // NOI18N
+        jd_videollamada.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 150));
+
+        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_videollamada.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_videollamada.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_modificar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/name-iloveimg-resized.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, 150));
+
+        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/surname-iloveimg-resized.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 140, 150));
+
+        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mail-iloveimg-resized.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 140, 150));
+
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/gender-iloveimg-resized.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, 140, 150));
+
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/phone-iloveimg-resized.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 140, 150));
+
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jd_modificar.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -161,14 +382,6 @@ public class Principal extends javax.swing.JFrame {
 
         tf_contra.setEditable(false);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 153));
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,10 +396,6 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(tf_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                     .addComponent(tf_contra))
                 .addGap(54, 54, 54))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jButton1)
-                .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,19 +408,23 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tf_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(23, 23, 23))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 360, 190));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 320, 190));
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(255, 255, 51));
-        jTextField1.setText("      SIMULADOR DE VOZ");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 157, -1));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/fondo-iloveimg-resized.jpg"))); // NOI18N
+        jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -294,6 +507,48 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select* "
+                    + "from Bitacora");
+            DefaultTableModel modelo = new DefaultTableModel();
+            if (rs.next()) {
+                Object[] newrow = {rs.getString(1), rs.getString(2)};
+                modelo.addRow(newrow);
+            }
+            jt_bitacora.setModel(modelo);
+            
+            Statement statement2 = connect.createStatement();
+            ResultSet rs2;
+            rs2 = statement2.executeQuery("select* "
+                    + "from Contacts");
+            DefaultTableModel modelo2 = new DefaultTableModel();
+            if (rs2.next()) {
+                Object[] newrow2 = {rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4),rs.getString(5)};
+                modelo.addRow(newrow2);
+            }
+            jt_contactos.setModel(modelo2);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jd_bitacoraWindowOpened
+
+    private void jd_videollamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowOpened
+        try {
+            Webcam webcam = Webcam.getDefault();
+            WebcamPanel panel = new WebcamPanel(webcam);
+            panel.setFPSDisplayed(true);
+            panel.setFillArea(true);
+            panel.setSize(100, 100);
+            jl_labelWebcam.add(panel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jd_videollamadaWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -332,30 +587,82 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cb_genero;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JDialog jd_bitacora;
+    private javax.swing.JDialog jd_buscar;
     private javax.swing.JDialog jd_crear;
+    private javax.swing.JDialog jd_mensaje;
+    private javax.swing.JDialog jd_modificar;
+    private javax.swing.JDialog jd_opcionesBuscar;
     private javax.swing.JDialog jd_principal;
+    private javax.swing.JDialog jd_telefono;
+    private javax.swing.JDialog jd_videollamada;
+    private javax.swing.JLabel jl_labelWebcam;
+    private javax.swing.JTable jt_bitacora;
+    private javax.swing.JTable jt_contactos;
     private javax.swing.JTextField tf_apellido;
+    private javax.swing.JTextField tf_apellidoBuscar;
+    private javax.swing.JTextField tf_apellidoBuscarOpciones;
     private javax.swing.JTextField tf_contra;
     private javax.swing.JTextField tf_mail;
     private javax.swing.JTextField tf_nombre;
+    private javax.swing.JTextField tf_nombreBuscar;
+    private javax.swing.JTextField tf_nombreBuscarOpciones;
     private javax.swing.JTextField tf_telefono;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
@@ -392,6 +699,19 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+    public void nombreBuscarTextField() {
+        if (this.isVisible() && !this.tf_nombreBuscar.isFocusOwner()) {
+            this.tf_nombreBuscar.grabFocus();
+        }
+    }
+
+    public void apellidoBuscarTextField() {
+        if (this.isVisible() && !this.tf_apellidoBuscar.isFocusOwner()) {
+            this.tf_apellidoBuscar.grabFocus();
+        }
+    }
+
+    
     public void enseñarCrear(){
         this.jd_crear.setModal(true);
         this.jd_crear.pack();
@@ -399,7 +719,21 @@ public class Principal extends javax.swing.JFrame {
         this.jd_crear.setVisible(true);
     }
     
-    public void Reconocedor(){
+    public void enseñarBitacora(){
+        this.jd_bitacora.setModal(true);
+        this.jd_bitacora.pack();
+        this.jd_bitacora.setLocationRelativeTo(this);
+        this.jd_bitacora.setVisible(true);
+    }
+    
+    public void enseñarBuscar(){
+        this.jd_buscar.setModal(true);
+        this.jd_buscar.pack();
+        this.jd_buscar.setLocationRelativeTo(this);
+        this.jd_buscar.setVisible(true);
+    }
+    
+    /*public void Reconocedor(){
         try {
             Configuration configuration = new Configuration();
             configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
@@ -436,5 +770,5 @@ public class Principal extends javax.swing.JFrame {
             System.out.println("Exception en " + e.toString());
             System.exit(0);
         }
-    }
+    }*/
 }

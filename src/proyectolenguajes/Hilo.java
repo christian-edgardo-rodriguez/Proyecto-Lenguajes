@@ -23,8 +23,8 @@ public class Hilo extends Thread {
         try {
             Configuration configuration = new Configuration();
             configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
-            configuration.setDictionaryPath("./3113.dic");
-            configuration.setLanguageModelPath("./3113.lm");
+            configuration.setDictionaryPath("./5442.dic");
+            configuration.setLanguageModelPath("./5442.lm");
             LiveSpeechRecognizer recognize = new LiveSpeechRecognizer(configuration);
             recognize.startRecognition(true);
             SpeechResult result;
@@ -39,9 +39,21 @@ public class Hilo extends Thread {
                 } else if (command.equalsIgnoreCase("mark")||command.equalsIgnoreCase("seven")) {
                     principal.nombreTextField(command);
                     System.out.println("MARK O SEVEN");
+                } else if (command.equalsIgnoreCase("first")) {
+                    principal.nombreBuscarTextField();
+                    System.out.println("BUSCAR NOMBRE");
+                } else if (command.equalsIgnoreCase("second")) {
+                    principal.apellidoBuscarTextField();
+                    System.out.println("BUSCAR APELLIDO");
                 } else if (command.equalsIgnoreCase("new")) {
                     principal.enseñarCrear();
                     System.out.println("NUEVO");
+                } else if (command.equalsIgnoreCase("log")) {
+                    principal.enseñarBitacora();
+                    System.out.println("BITACORA");
+                }   else if (command.equalsIgnoreCase("search")) {
+                    principal.enseñarBuscar();
+                    System.out.println("BUSCAR");
                 } else if (command.equalsIgnoreCase("call")) {
                     System.out.println("LLAMAR");
                 } else if (command.equalsIgnoreCase("out")) {
