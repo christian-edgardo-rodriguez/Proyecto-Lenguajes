@@ -14,10 +14,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -104,6 +104,8 @@ public class Principal extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel35 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        cb_listaContactos = new javax.swing.JComboBox();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jd_videollamada = new javax.swing.JDialog();
@@ -120,6 +122,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel45 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jd_buzonMensajes = new javax.swing.JDialog();
+        jLabel49 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -129,6 +137,14 @@ public class Principal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        jd_principal.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jd_principalWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jd_principalWindowOpened(evt);
+            }
+        });
         jd_principal.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/tabla-iloveimg-resized.jpg"))); // NOI18N
@@ -296,10 +312,15 @@ public class Principal extends javax.swing.JFrame {
         jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 340, 330));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
-        jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
+        jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 140, 150));
 
         jButton4.setText("Mandar");
         jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
+
+        jLabel46.setText("Para: ");
+        jd_mensaje.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+
+        jd_mensaje.getContentPane().add(cb_listaContactos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -362,15 +383,33 @@ public class Principal extends javax.swing.JFrame {
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_modificar.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_buzonMensajes.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mailbox-iloveimg-resized.png"))); // NOI18N
+        jd_buzonMensajes.getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        jd_buzonMensajes.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 360, 100));
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_buzonMensajes.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
+        jd_buzonMensajes.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 255, 204));
@@ -429,21 +468,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        /*try{
-            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, "Se ha cerrado el simulador");
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-            connect.close();
-        }catch(SQLException ex){
-            System.out.print(ex);
-        }*/
-    }//GEN-LAST:event_formWindowClosing
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (tf_usuario.getText().equalsIgnoreCase("mark") && tf_contra.getText().equalsIgnoreCase("seven")) {
             this.jd_principal.setModal(true);
@@ -479,32 +503,20 @@ public class Principal extends javax.swing.JFrame {
             if (retorno > 0) {
                 JOptionPane.showMessageDialog(this, "Contacto creado");
             }
-            /*PreparedStatement statement2 = connect.prepareStatement("Insert into Bitacora values (?,?)");
+            statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha creado un contacto.");
-            int prueba2 = statement2.executeUpdate();
+            statement.setString(3, nombre);
+            statement.setString(4, apellido);
+            int prueba2 = statement.executeUpdate();
             if (prueba2 > 0) {
                 System.out.println("Bitacora actualizada.");
-            }*/
+            }
             this.jd_crear.dispose();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*try {
-            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, "Se ha abierto el simulador");
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }//GEN-LAST:event_formWindowOpened
 
     private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
         String[] columnas = new String[4];
@@ -590,6 +602,38 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jd_videollamadaWindowOpened
 
+    private void jd_principalWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowOpened
+        try {
+            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se ha abierto el simulador");
+            statement.setString(3, "NULL");
+            statement.setString(4, "NULL");
+            int prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jd_principalWindowOpened
+
+    private void jd_principalWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowClosed
+        try {
+            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se ha cerrado el simulador");
+            statement.setString(3, "NULL");
+            statement.setString(4, "NULL");
+            int prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jd_principalWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -627,6 +671,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cb_genero;
+    private javax.swing.JComboBox cb_listaContactos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -671,6 +716,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -681,11 +730,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JDialog jd_bitacora;
     private javax.swing.JDialog jd_buscar;
+    private javax.swing.JDialog jd_buzonMensajes;
     private javax.swing.JDialog jd_crear;
     private javax.swing.JDialog jd_mensaje;
     private javax.swing.JDialog jd_modificar;
@@ -752,7 +804,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    
     public void enseñarCrear(){
         this.jd_crear.setModal(true);
         this.jd_crear.pack();
@@ -772,6 +823,13 @@ public class Principal extends javax.swing.JFrame {
         this.jd_buscar.pack();
         this.jd_buscar.setLocationRelativeTo(this);
         this.jd_buscar.setVisible(true);
+    }
+    
+    public void enseñarModificar(){
+        this.jd_modificar.setModal(true);
+        this.jd_modificar.pack();
+        this.jd_modificar.setLocationRelativeTo(this);
+        this.jd_modificar.setVisible(true);
     }
     
     public int conteoParaBitacora() {

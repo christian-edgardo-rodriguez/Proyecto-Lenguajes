@@ -51,8 +51,11 @@ public class Hilo extends Thread {
                 } else if (command.equalsIgnoreCase("log")) {
                     principal.enseñarBitacora();
                     System.out.println("BITACORA");
-                }   else if (command.equalsIgnoreCase("search")) {
+                } else if (command.equalsIgnoreCase("search")) {
                     principal.enseñarBuscar();
+                    System.out.println("BUSCAR");
+                } else if (command.equalsIgnoreCase("change")) {
+                    principal.enseñarModificar();
                     System.out.println("BUSCAR");
                 } else if (command.equalsIgnoreCase("call")) {
                     System.out.println("LLAMAR");
