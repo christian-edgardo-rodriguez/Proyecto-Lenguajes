@@ -15,7 +15,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;import java.sql.Statement;
-;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultListModel;
@@ -133,18 +132,18 @@ public class Principal extends javax.swing.JFrame {
         jd_principal.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/tabla-iloveimg-resized.jpg"))); // NOI18N
-        jd_principal.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 140, 150));
+        jd_principal.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 140, 150));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
-        jd_principal.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 140, 150));
+        jd_principal.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 140, 150));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
-        jd_principal.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
+        jd_principal.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_principal.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_principal.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_principal.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_crear.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,15 +176,15 @@ public class Principal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jd_crear.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
+        jd_crear.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
-        jd_crear.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
+        jd_crear.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 150));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_crear.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_crear.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_crear.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_buscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,16 +198,16 @@ public class Principal extends javax.swing.JFrame {
         jd_buscar.getContentPane().add(tf_apellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 130, -1));
 
         jButton2.setText("Buscar");
-        jd_buscar.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 100, 40));
+        jd_buscar.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 100, 40));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
         jd_buscar.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jLabel18.setText("Apellido");
-        jd_buscar.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_buscar.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_buscar.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_bitacora.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -228,19 +227,19 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jt_contactos);
 
-        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 350, 90));
+        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 360, 90));
 
         jt_bitacora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fecha", "Acción"
+                "Fecha", "Acción", "Nombre", "Apellido"
             }
         ));
         jScrollPane2.setViewportView(jt_bitacora);
 
-        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 350, 90));
+        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, 90));
 
         jTextField1.setEditable(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -253,9 +252,9 @@ public class Principal extends javax.swing.JFrame {
         jd_bitacora.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 90, -1));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_bitacora.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_bitacora.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_bitacora.getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_opcionesBuscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -275,17 +274,17 @@ public class Principal extends javax.swing.JFrame {
         jd_opcionesBuscar.getContentPane().add(tf_apellidoBuscarOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 130, -1));
 
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_opcionesBuscar.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_opcionesBuscar.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_telefono.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-182655-iloveimg-resized.png"))); // NOI18N
-        jd_telefono.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-182655-iloveimg-resized-iloveimg-resized (1).png"))); // NOI18N
+        jd_telefono.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_telefono.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_mensaje.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -294,18 +293,18 @@ public class Principal extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
 
-        jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 340, 330));
+        jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 340, 330));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 140, 150));
 
         jButton4.setText("Mandar");
-        jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
+        jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_videollamada.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -326,41 +325,41 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        jd_videollamada.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 340, 380));
+        jd_videollamada.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 340, 380));
 
         jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
-        jd_videollamada.getContentPane().add(jl_labelWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 640, 120, 70));
+        jd_videollamada.getContentPane().add(jl_labelWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, 120, 70));
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/videocall-iloveimg-resized.png"))); // NOI18N
-        jd_videollamada.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 150));
+        jd_videollamada.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 140, 150));
 
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_videollamada.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_videollamada.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_videollamada.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_modificar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/name-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, 150));
+        jd_modificar.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 140, 150));
 
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/surname-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 140, 150));
+        jd_modificar.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 140, 150));
 
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mail-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 140, 150));
+        jd_modificar.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 140, 150));
 
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/gender-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, 140, 150));
+        jd_modificar.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 140, 150));
 
         jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/phone-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 140, 150));
+        jd_modificar.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        jd_modificar.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_modificar.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -414,7 +413,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 320, 190));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 630));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -422,16 +421,16 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 710, 90, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        try{
+        /*try{
             PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha cerrado el simulador");
@@ -442,7 +441,7 @@ public class Principal extends javax.swing.JFrame {
             connect.close();
         }catch(SQLException ex){
             System.out.print(ex);
-        }
+        }*/
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -480,13 +479,13 @@ public class Principal extends javax.swing.JFrame {
             if (retorno > 0) {
                 JOptionPane.showMessageDialog(this, "Contacto creado");
             }
-            PreparedStatement statement2 = connect.prepareStatement("Insert into Bitacora values (?,?)");
+            /*PreparedStatement statement2 = connect.prepareStatement("Insert into Bitacora values (?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha creado un contacto.");
             int prueba2 = statement2.executeUpdate();
             if (prueba2 > 0) {
                 System.out.println("Bitacora actualizada.");
-            }
+            }*/
             this.jd_crear.dispose();
         } catch (Exception e) {
             e.printStackTrace();
@@ -494,7 +493,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
+        /*try {
             PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha abierto el simulador");
@@ -504,15 +503,57 @@ public class Principal extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_formWindowOpened
 
     private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
-        try {
+        String[] columnas = new String[4];
+        columnas[0] = "Fecha";
+        columnas[1] = "Acción";
+        columnas[2] = "Nombre";
+        columnas[3] = "Apellido";
+        int size = conteoParaBitacora();
+        String[][] contenido = new String[size][4];
+        String[] fecha = fechaBitacora();
+        String[] accion = accionBitacora();
+        String[] nombre = nombreBitacora();
+        String[] apellido = apellidoBitacora();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = fecha[i]+ "";
+            contenido[i][1] = accion[i]+ "";
+            contenido[i][2] = nombre[i]+ "";
+            contenido[i][3] = apellido[i]+ "";
+        }
+        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
+        jt_bitacora.setModel(modelo);
+        
+        columnas = new String[5];
+        columnas[0] = "Número";
+        columnas[1] = "Nombre";
+        columnas[2] = "Apellido";
+        columnas[3] = "E-Mail";
+        columnas[4] = "Genero";
+        size = conteoParaContactos();
+        contenido = new String[size][5];
+        int[] numero = numeroContactos();
+        String[] nombreContacto = nombreContactos();
+        String[] apellidoContacto = apellidoContactos();
+        String[] mail = mailContactos();
+        String[] genero = generoContactos();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = numero[i]+ "";
+            contenido[i][1] = nombreContacto[i]+ "";
+            contenido[i][2] = apellidoContacto[i]+ "";
+            contenido[i][3] = mail[i]+ "";
+            contenido[i][4] = genero[i]+ "";
+        }
+        DefaultTableModel modelo2 = new DefaultTableModel(contenido, columnas);
+        jt_contactos.setModel(modelo2);
+        /*try {
             Statement statement = connect.createStatement();
             ResultSet rs;
-            rs = statement.executeQuery("select* "
-                    + "from Bitacora");
+            rs = statement.executeQuery("select B.fecha, B.acción "
+                    + "from Bitacora B");
             DefaultTableModel modelo = new DefaultTableModel();
             if (rs.next()) {
                 Object[] newrow = {rs.getString(1), rs.getString(2)};
@@ -533,7 +574,7 @@ public class Principal extends javax.swing.JFrame {
             
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_jd_bitacoraWindowOpened
 
     private void jd_videollamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowOpened
@@ -731,6 +772,189 @@ public class Principal extends javax.swing.JFrame {
         this.jd_buscar.pack();
         this.jd_buscar.setLocationRelativeTo(this);
         this.jd_buscar.setVisible(true);
+    }
+    
+    public int conteoParaBitacora() {
+        int temp = 0;
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select count(fecha) from Bitacora;");
+            while (rs.next()) {
+                temp = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return temp;
+    }
+    
+     int conteoParaContactos() {
+        int temp = 0;
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select count(numeroTeléfono) from Contacts;");
+            while (rs.next()) {
+                temp = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+     
+    public String[] nombreBitacora() {
+        String[] nombre = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select nombre from Bitacora;");
+            int contador = 0;
+            while (rs.next()) {
+                nombre[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombre;
+    }
+    
+    public String[] apellidoBitacora() {
+        String[] apellido = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select apellido from Bitacora;");
+            int contador = 0;
+            while (rs.next()) {
+                apellido[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return apellido;
+    }
+    
+    public String[] fechaBitacora() {
+        String[] fecha = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select fecha from Bitacora;");
+            int contador = 0;
+            while (rs.next()) {
+                fecha[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fecha;
+    }
+    
+    public String[] accionBitacora() {
+        String[] accion = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select nombre from Bitacora;");
+            int contador = 0;
+            while (rs.next()) {
+                accion[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accion;
+    }
+    
+    public int[] numeroContactos() {
+        int[] numero = new int[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select numeroTeléfono from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                numero[contador] = rs.getInt(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numero;
+    }
+    
+    public String[] nombreContactos() {
+        String[] nombre = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select nombre from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                nombre[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombre;
+    }
+    
+    public String[] apellidoContactos() {
+        String[] apellido = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select apellido from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                apellido[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return apellido;
+    }
+    
+    public String[] mailContactos() {
+        String[] mail = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select email from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                mail[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mail;
+    }
+    
+    public String[] generoContactos() {
+        String[] genero = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select genero from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                genero[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return genero;
     }
     
     /*public void Reconocedor(){
