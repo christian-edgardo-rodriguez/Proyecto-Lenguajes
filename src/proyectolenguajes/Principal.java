@@ -7,9 +7,6 @@ package proyectolenguajes;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
-import edu.cmu.sphinx.api.Configuration;
-import edu.cmu.sphinx.api.LiveSpeechRecognizer;
-import edu.cmu.sphinx.api.SpeechResult;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -101,11 +99,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jd_mensaje = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ta_mensaje = new javax.swing.JTextArea();
         jLabel35 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jLabel46 = new javax.swing.JLabel();
-        cb_listaContactos = new javax.swing.JComboBox();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jd_videollamada = new javax.swing.JDialog();
@@ -114,20 +110,22 @@ public class Principal extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jd_modificar = new javax.swing.JDialog();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        jd_buzon = new javax.swing.JDialog();
         jLabel45 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jt_buzon = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jd_buzonMensajes = new javax.swing.JDialog();
-        jLabel49 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jd_marcando = new javax.swing.JDialog();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
+        jd_llamada = new javax.swing.JDialog();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -138,8 +136,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         jd_principal.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                jd_principalWindowClosed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_principalWindowClosing(evt);
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_principalWindowOpened(evt);
@@ -210,10 +208,15 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setText("Apellido");
         jd_buscar.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
-        jd_buscar.getContentPane().add(tf_nombreBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 130, -1));
-        jd_buscar.getContentPane().add(tf_apellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 130, -1));
+        jd_buscar.getContentPane().add(tf_nombreBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 130, -1));
+        jd_buscar.getContentPane().add(tf_apellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 130, -1));
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jd_buscar.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 100, 40));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
@@ -305,22 +308,22 @@ public class Principal extends javax.swing.JFrame {
 
         jd_mensaje.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        ta_mensaje.setColumns(20);
+        ta_mensaje.setRows(5);
+        jScrollPane3.setViewportView(ta_mensaje);
 
-        jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 340, 330));
+        jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 340, 360));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 140, 150));
 
         jButton4.setText("Mandar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
-
-        jLabel46.setText("Para: ");
-        jd_mensaje.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
-
-        jd_mensaje.getContentPane().add(cb_listaContactos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -335,21 +338,20 @@ public class Principal extends javax.swing.JFrame {
         });
         jd_videollamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addComponent(jl_labelWebcam, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addComponent(jl_labelWebcam, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
         );
 
-        jd_videollamada.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 340, 380));
-
-        jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
-        jd_videollamada.getContentPane().add(jl_labelWebcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, 120, 70));
+        jd_videollamada.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 320, 310));
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/videocall-iloveimg-resized.png"))); // NOI18N
         jd_videollamada.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 140, 150));
@@ -360,54 +362,64 @@ public class Principal extends javax.swing.JFrame {
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_videollamada.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jd_modificar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jd_buzon.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jd_buzonWindowOpened(evt);
+            }
+        });
+        jd_buzon.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/name-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 140, 150));
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mailbox-iloveimg-resized.png"))); // NOI18N
+        jd_buzon.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
 
-        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/surname-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 140, 150));
-
-        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mail-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 140, 150));
-
-        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/gender-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 140, 150));
-
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/phone-iloveimg-resized.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
-
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
-
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
-        jd_modificar.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jd_buzonMensajes.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mailbox-iloveimg-resized.png"))); // NOI18N
-        jd_buzonMensajes.getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_buzon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha", "Mensaje", "Nombre", "Apellido"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane5.setViewportView(jt_buzon);
 
-        jd_buzonMensajes.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 360, 100));
+        jd_buzon.getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 360, 170));
 
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
-        jd_buzonMensajes.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
+        jd_buzon.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
+
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
+        jd_buzon.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_marcando.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/verde.PNG"))); // NOI18N
+        jd_marcando.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 60));
+
+        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
+        jd_marcando.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170317-152653-iloveimg-resized.png"))); // NOI18N
+        jd_marcando.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
 
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
-        jd_buzonMensajes.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jd_marcando.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jd_llamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField3.setBackground(new java.awt.Color(102, 255, 102));
+        jTextField3.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jd_llamada.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 170, 70));
+
+        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
+        jd_llamada.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
+
+        jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170317-152653-iloveimg-resized.png"))); // NOI18N
+        jd_llamada.getContentPane().add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
+
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
+        jd_llamada.getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -470,6 +482,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (tf_usuario.getText().equalsIgnoreCase("mark") && tf_contra.getText().equalsIgnoreCase("seven")) {
+            this.setVisible(false);
             this.jd_principal.setModal(true);
             this.jd_principal.pack();
             this.jd_principal.setLocationRelativeTo(this);
@@ -520,10 +533,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
         String[] columnas = new String[4];
-        columnas[0] = "Fecha";
-        columnas[1] = "Acción";
-        columnas[2] = "Nombre";
-        columnas[3] = "Apellido";
         int size = conteoParaBitacora();
         String[][] contenido = new String[size][4];
         String[] fecha = fechaBitacora();
@@ -540,11 +549,6 @@ public class Principal extends javax.swing.JFrame {
         jt_bitacora.setModel(modelo);
         
         columnas = new String[5];
-        columnas[0] = "Número";
-        columnas[1] = "Nombre";
-        columnas[2] = "Apellido";
-        columnas[3] = "E-Mail";
-        columnas[4] = "Genero";
         size = conteoParaContactos();
         contenido = new String[size][5];
         int[] numero = numeroContactos();
@@ -561,32 +565,6 @@ public class Principal extends javax.swing.JFrame {
         }
         DefaultTableModel modelo2 = new DefaultTableModel(contenido, columnas);
         jt_contactos.setModel(modelo2);
-        /*try {
-            Statement statement = connect.createStatement();
-            ResultSet rs;
-            rs = statement.executeQuery("select B.fecha, B.acción "
-                    + "from Bitacora B");
-            DefaultTableModel modelo = new DefaultTableModel();
-            if (rs.next()) {
-                Object[] newrow = {rs.getString(1), rs.getString(2)};
-                modelo.addRow(newrow);
-            }
-            jt_bitacora.setModel(modelo);
-            
-            Statement statement2 = connect.createStatement();
-            ResultSet rs2;
-            rs2 = statement2.executeQuery("select* "
-                    + "from Contacts");
-            DefaultTableModel modelo2 = new DefaultTableModel();
-            if (rs2.next()) {
-                Object[] newrow2 = {rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4),rs.getString(5)};
-                modelo.addRow(newrow2);
-            }
-            jt_contactos.setModel(modelo2);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }//GEN-LAST:event_jd_bitacoraWindowOpened
 
     private void jd_videollamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowOpened
@@ -595,7 +573,7 @@ public class Principal extends javax.swing.JFrame {
             WebcamPanel panel = new WebcamPanel(webcam);
             panel.setFPSDisplayed(true);
             panel.setFillArea(true);
-            panel.setSize(100, 100);
+            panel.setSize(320, 310);
             jl_labelWebcam.add(panel);
         } catch (Exception e) {
             e.printStackTrace();
@@ -618,7 +596,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jd_principalWindowOpened
 
-    private void jd_principalWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowClosed
+    private void jd_principalWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowClosing
         try {
             PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
@@ -632,7 +610,67 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jd_principalWindowClosed
+        this.setVisible(true);
+    }//GEN-LAST:event_jd_principalWindowClosing
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (tf_nombreBuscar.getText().equalsIgnoreCase("yo") && tf_apellidoBuscar.getText().equalsIgnoreCase("tu")) {
+            nombreBuscar = tf_nombreBuscar.getText();
+            apellidoBuscar = tf_apellidoBuscar.getText();
+            this.jd_buscar.setVisible(false);
+            this.jd_opcionesBuscar.setModal(true);
+            this.jd_opcionesBuscar.pack();
+            this.jd_opcionesBuscar.setLocationRelativeTo(this);
+            this.jd_opcionesBuscar.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "El contacto no existe.");
+        }
+        this.tf_nombreBuscar.setText("");
+        this.tf_apellidoBuscar.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            PreparedStatement statement = connect.prepareStatement("Insert into Mensaje values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, ta_mensaje.getText());
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            int prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+            statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se ha enviado un mensaje.");
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jd_buzonWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_buzonWindowOpened
+        String[] columnas = new String[4];
+        int size = conteoParaMensaje();
+        String[][] contenido = new String[size][4];
+        String[] fecha = fechaMensaje();
+        String[] mensaje = mensajeMensaje();
+        String[] nombre = nombreMensaje();
+        String[] apellido = apellidoMensaje();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = fecha[i]+ "";
+            contenido[i][1] = mensaje[i]+ "";
+            contenido[i][2] = nombre[i]+ "";
+            contenido[i][3] = apellido[i]+ "";
+        }
+        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
+        jt_buzon.setModel(modelo);
+    }//GEN-LAST:event_jd_buzonWindowOpened
 
     /**
      * @param args the command line arguments
@@ -671,7 +709,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cb_genero;
-    private javax.swing.JComboBox cb_listaContactos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -714,13 +751,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -730,24 +766,26 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_bitacora;
     private javax.swing.JDialog jd_buscar;
-    private javax.swing.JDialog jd_buzonMensajes;
+    private javax.swing.JDialog jd_buzon;
     private javax.swing.JDialog jd_crear;
+    private javax.swing.JDialog jd_llamada;
+    private javax.swing.JDialog jd_marcando;
     private javax.swing.JDialog jd_mensaje;
-    private javax.swing.JDialog jd_modificar;
     private javax.swing.JDialog jd_opcionesBuscar;
     private javax.swing.JDialog jd_principal;
     private javax.swing.JDialog jd_telefono;
     private javax.swing.JDialog jd_videollamada;
     private javax.swing.JLabel jl_labelWebcam;
     private javax.swing.JTable jt_bitacora;
+    private javax.swing.JTable jt_buzon;
     private javax.swing.JTable jt_contactos;
+    private javax.swing.JTextArea ta_mensaje;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_apellidoBuscar;
     private javax.swing.JTextField tf_apellidoBuscarOpciones;
@@ -762,6 +800,8 @@ public class Principal extends javax.swing.JFrame {
     Connection connect;
     Hilo thread;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    String nombreBuscar, apellidoBuscar;
+    ArrayList listaCambio = new ArrayList();
     
     public void conectarBaseDatos() {
         try {
@@ -825,11 +865,19 @@ public class Principal extends javax.swing.JFrame {
         this.jd_buscar.setVisible(true);
     }
     
-    public void enseñarModificar(){
-        this.jd_modificar.setModal(true);
-        this.jd_modificar.pack();
-        this.jd_modificar.setLocationRelativeTo(this);
-        this.jd_modificar.setVisible(true);
+    public void enseñarBuzon(){
+        this.jd_opcionesBuscar.setVisible(false);
+        this.jd_buzon.setModal(true);
+        this.jd_buzon.pack();
+        this.jd_buzon.setLocationRelativeTo(this);
+        this.jd_buzon.setVisible(true);
+    }
+    
+    public void enseñarVideollamada(){
+        this.jd_videollamada.setModal(true);
+        this.jd_videollamada.pack();
+        this.jd_videollamada.setLocationRelativeTo(this);
+        this.jd_videollamada.setVisible(true);
     }
     
     public int conteoParaBitacora() {
@@ -842,7 +890,7 @@ public class Principal extends javax.swing.JFrame {
                 temp = rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return temp;
     }
@@ -852,7 +900,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
-            rs = statement.executeQuery("select count(numeroTeléfono) from Contacts;");
+            rs = statement.executeQuery("select count(numero) from Contacts;");
             while (rs.next()) {
                 temp = rs.getInt(1);
             }
@@ -861,9 +909,24 @@ public class Principal extends javax.swing.JFrame {
         }
         return temp;
     }
-     
+    
+    public int conteoParaMensaje() {
+        int temp = 0;
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select count(fecha) from Mensaje;");
+            while (rs.next()) {
+                temp = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+    
     public String[] nombreBitacora() {
-        String[] nombre = new String[conteoParaContactos()];
+        String[] nombre = new String[conteoParaBitacora()];
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
@@ -880,7 +943,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public String[] apellidoBitacora() {
-        String[] apellido = new String[conteoParaContactos()];
+        String[] apellido = new String[conteoParaBitacora()];
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
@@ -897,7 +960,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public String[] fechaBitacora() {
-        String[] fecha = new String[conteoParaContactos()];
+        String[] fecha = new String[conteoParaBitacora()];
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
@@ -914,11 +977,11 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public String[] accionBitacora() {
-        String[] accion = new String[conteoParaContactos()];
+        String[] accion = new String[conteoParaBitacora()];
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
-            rs = statement.executeQuery("select nombre from Bitacora;");
+            rs = statement.executeQuery("select accion from Bitacora;");
             int contador = 0;
             while (rs.next()) {
                 accion[contador] = rs.getNString(1);
@@ -935,7 +998,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             Statement statement = connect.createStatement();
             ResultSet rs;
-            rs = statement.executeQuery("select numeroTeléfono from Contacts;");
+            rs = statement.executeQuery("select numero from Contacts;");
             int contador = 0;
             while (rs.next()) {
                 numero[contador] = rs.getInt(1);
@@ -955,7 +1018,7 @@ public class Principal extends javax.swing.JFrame {
             rs = statement.executeQuery("select nombre from Contacts;");
             int contador = 0;
             while (rs.next()) {
-                nombre[contador] = rs.getNString(1);
+                nombre[contador] = rs.getString(1);
                 contador++;
             }
         } catch (SQLException e) {
@@ -972,7 +1035,7 @@ public class Principal extends javax.swing.JFrame {
             rs = statement.executeQuery("select apellido from Contacts;");
             int contador = 0;
             while (rs.next()) {
-                apellido[contador] = rs.getNString(1);
+                apellido[contador] = rs.getString(1);
                 contador++;
             }
         } catch (SQLException e) {
@@ -989,7 +1052,7 @@ public class Principal extends javax.swing.JFrame {
             rs = statement.executeQuery("select email from Contacts;");
             int contador = 0;
             while (rs.next()) {
-                mail[contador] = rs.getNString(1);
+                mail[contador] = rs.getString(1);
                 contador++;
             }
         } catch (SQLException e) {
@@ -1006,7 +1069,7 @@ public class Principal extends javax.swing.JFrame {
             rs = statement.executeQuery("select genero from Contacts;");
             int contador = 0;
             while (rs.next()) {
-                genero[contador] = rs.getNString(1);
+                genero[contador] = rs.getString(1);
                 contador++;
             }
         } catch (SQLException e) {
@@ -1015,42 +1078,336 @@ public class Principal extends javax.swing.JFrame {
         return genero;
     }
     
-    /*public void Reconocedor(){
+    public String[] fechaMensaje() {
+        String[] fecha = new String[conteoParaMensaje()];
         try {
-            Configuration configuration = new Configuration();
-            configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
-            configuration.setDictionaryPath("./2163.dic");
-            configuration.setLanguageModelPath("./2163.lm");
-
-            //Recognizer Object, Pass the Configuration object
-            LiveSpeechRecognizer recognize = new LiveSpeechRecognizer(configuration);
-
-            //Start Recognition Process (The bool parameter clears the previous cache if true)
-            recognize.startRecognition(true);
-
-            //Create SpeechResult Object
-            SpeechResult result;
-
-            //Checking if recognizer has recognized the speech
-            while ((result = recognize.getResult()) != null) {
-                //Get the recognize speech
-                String command = result.getHypothesis();
-                if (command.equalsIgnoreCase("user")) {
-                    System.out.println("USUARIO");
-                } else if (command.equalsIgnoreCase("pass")) {
-                    System.out.println("PASSWORD");
-                } else if (command.equalsIgnoreCase("new")) {
-                    System.out.println("NUEVO");
-                } else if (command.equalsIgnoreCase("call")) {
-                    System.out.println("LLAMAR");
-                } else if (command.equalsIgnoreCase("out")) {
-                    System.out.println("SALIR");
-                    System.exit(0);
-                }
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select fecha from Mensaje;");
+            int contador = 0;
+            while (rs.next()) {
+                fecha[contador] = rs.getNString(1);
+                contador++;
             }
-        } catch (Exception e) {
-            System.out.println("Exception en " + e.toString());
-            System.exit(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }*/
+        return fecha;
+    }
+    
+    public String[] mensajeMensaje() {
+        String[] mensaje = new String[conteoParaMensaje()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select mensaje from Mensaje;");
+            int contador = 0;
+            while (rs.next()) {
+                mensaje[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mensaje;
+    }
+    
+    public String[] nombreMensaje() {
+        String[] nombre = new String[conteoParaMensaje()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select nombre from Mensaje;");
+            int contador = 0;
+            while (rs.next()) {
+                nombre[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombre;
+    }
+    
+    public String[] apellidoMensaje() {
+        String[] apellido = new String[conteoParaMensaje()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select apellido from Mensaje;");
+            int contador = 0;
+            while (rs.next()) {
+                apellido[contador] = rs.getNString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return apellido;
+    }
+    
+    public ArrayList listaParaCambio(String nombreBuscar, String apellidoBuscar){
+        ArrayList lista = new ArrayList();
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select numero from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getInt(1));
+            }
+            rs = statement.executeQuery("select nombre from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            rs = statement.executeQuery("select apellido from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            rs = statement.executeQuery("select email from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+            rs = statement.executeQuery("select genero from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    public void cambiarNumero() {
+        String nuevo = JOptionPane.showInputDialog(this, "Escriba el nuevo numero", "Cambio de numero"
+                ,JOptionPane.QUESTION_MESSAGE);
+        int opcion = JOptionPane.OK_OPTION;
+        int nuevoNumero = Integer.parseInt(nuevo);
+        if (opcion == 0) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                String nombre = (String)listaCambio.get(1);
+                String apellido = (String)listaCambio.get(2);
+                String mail = (String)listaCambio.get(3);
+                String genero = (String)listaCambio.get(4);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                    update.setInt(1, nuevoNumero);
+                    update.setString(2, nombre);
+                    update.setString(3, apellido);
+                    update.setString(4, mail);
+                    update.setString(5, genero);
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el numero.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado el numero de un contacto");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    
+    public void cambiarNombre() {
+        String nuevoNombre = JOptionPane.showInputDialog(this, "Escriba el nuevo nombre", "Cambio de nombre"
+                ,JOptionPane.QUESTION_MESSAGE);
+        int opcion = JOptionPane.OK_OPTION;
+        if (opcion == 0) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                int numero = (Integer)listaCambio.get(0);
+                String apellido = (String)listaCambio.get(2);
+                String mail = (String)listaCambio.get(3);
+                String genero = (String)listaCambio.get(4);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                    update.setInt(1, numero);
+                    update.setString(2, nuevoNombre);
+                    update.setString(3, apellido);
+                    update.setString(4, mail);
+                    update.setString(5, genero);
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el nombre.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado el nombre de un contacto");
+                preparedStatement.setString(3, nuevoNombre);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    
+    public void cambiarApellido() {
+        String nuevoApellido = JOptionPane.showInputDialog(this, "Escriba el nuevo apellido", "Cambio de apellido"
+                ,JOptionPane.QUESTION_MESSAGE);
+        int opcion = JOptionPane.OK_OPTION;
+        if (opcion == 0) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                int numero = (Integer)listaCambio.get(0);
+                String nombre = (String)listaCambio.get(1);
+                String mail = (String)listaCambio.get(3);
+                String genero = (String)listaCambio.get(4);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                    update.setInt(1, numero);
+                    update.setString(2, nombre);
+                    update.setString(3, nuevoApellido);
+                    update.setString(4, mail);
+                    update.setString(5, genero);
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el nombre.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado el nombre de un contacto");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, nuevoApellido);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    
+    public void cambiarMail() {
+        String nuevoMail = JOptionPane.showInputDialog(this, "Escriba el nuevo email", "Cambio de email"
+                ,JOptionPane.QUESTION_MESSAGE);
+        int opcion = JOptionPane.OK_OPTION;
+        if (opcion == 0) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                int numero = (Integer)listaCambio.get(0);
+                String nombre = (String)listaCambio.get(1);
+                String apellido = (String)listaCambio.get(2);
+                String genero = (String)listaCambio.get(4);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                    update.setInt(1, numero);
+                    update.setString(2, nombre);
+                    update.setString(3, apellido);
+                    update.setString(4, nuevoMail);
+                    update.setString(5, genero);
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el email.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado el email de un contacto");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    
+    public void cambiarGenero() {
+        String nuevoGenero = JOptionPane.showInputDialog(this, "Escriba el nuevo genero", "Cambio de genero"
+                ,JOptionPane.QUESTION_MESSAGE);
+        int opcion = JOptionPane.OK_OPTION;
+        if (opcion == 0) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                int numero = (Integer)listaCambio.get(0);
+                String nombre = (String)listaCambio.get(1);
+                String apellido = (String)listaCambio.get(2);
+                String mail = (String)listaCambio.get(3);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                    update.setInt(1, numero);
+                    update.setString(2, nombre);
+                    update.setString(3, apellido);
+                    update.setString(4, mail);
+                    update.setString(5, nuevoGenero);
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el genero.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado el genero de un contacto");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    public void borrarContacto(){
+        int seguro = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar este contacto?");
+        if (seguro == JOptionPane.YES_OPTION) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement delete = connect.prepareStatement("delete from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                    delete.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha borrado el contacto.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha borrado un contacto.");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
 }

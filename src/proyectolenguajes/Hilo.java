@@ -54,11 +54,32 @@ public class Hilo extends Thread {
                 } else if (command.equalsIgnoreCase("search")) {
                     principal.enseñarBuscar();
                     System.out.println("BUSCAR");
-                } else if (command.equalsIgnoreCase("change")) {
-                    principal.enseñarModificar();
-                    System.out.println("BUSCAR");
+                } else if (command.equalsIgnoreCase("send")) {
+                    principal.enseñarBuzon();
+                    System.out.println("BUZON");
+                } else if (command.equalsIgnoreCase("name")) {
+                    principal.cambiarNombre();
+                    System.out.println("CAMBIAR NOMBRE");
+                } else if (command.equalsIgnoreCase("phone")) {
+                    principal.cambiarNumero();
+                    System.out.println("CAMBIAR Telefono");
+                } else if (command.equalsIgnoreCase("surname")) {
+                    principal.cambiarApellido();
+                    System.out.println("CAMBIAR APELLIDO");
+                } else if (command.equalsIgnoreCase("email")) {
+                    principal.cambiarMail();
+                    System.out.println("CAMBIAR EMAIL");
+                } else if (command.equalsIgnoreCase("gender")) {
+                    principal.cambiarGenero();
+                    System.out.println("CAMBIAR GENERO");
+                } else if (command.equalsIgnoreCase("erase")) {
+                    principal.borrarContacto();
+                    System.out.println("BORRAR");
                 } else if (command.equalsIgnoreCase("call")) {
                     System.out.println("LLAMAR");
+                } else if (command.equalsIgnoreCase("videocall")) {
+                    principal.enseñarVideollamada();
+                    System.out.println("VIDEOLLAMADA");
                 } else if (command.equalsIgnoreCase("out")) {
                     System.out.println("SALIR");
                     System.exit(0);
