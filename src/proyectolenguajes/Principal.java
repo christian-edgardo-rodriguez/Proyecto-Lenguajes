@@ -105,6 +105,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jd_videollamada = new javax.swing.JDialog();
+        jl_tiempoVideollamada = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jl_labelWebcam = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -124,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
         jd_llamada = new javax.swing.JDialog();
         jTextField3 = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
+        jl_tiempoLlamada = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -332,11 +334,18 @@ public class Principal extends javax.swing.JFrame {
         jd_mensaje.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_videollamada.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_videollamadaWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_videollamadaWindowOpened(evt);
             }
         });
         jd_videollamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jl_tiempoVideollamada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jl_tiempoVideollamada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jd_videollamada.getContentPane().add(jl_tiempoVideollamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 70, 20));
 
         jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -404,6 +413,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_marcando.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_llamada.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_llamadaWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jd_llamadaWindowOpened(evt);
+            }
+        });
         jd_llamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextField3.setBackground(new java.awt.Color(102, 255, 102));
@@ -414,6 +431,10 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
         jd_llamada.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
+
+        jl_tiempoLlamada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jl_tiempoLlamada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jd_llamada.getContentPane().add(jl_tiempoLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 70, 20));
 
         jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170317-152653-iloveimg-resized.png"))); // NOI18N
         jd_llamada.getContentPane().add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -578,6 +599,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        tiempoVideollamada.contadorRelojLlamada(this.jl_tiempoVideollamada);
     }//GEN-LAST:event_jd_videollamadaWindowOpened
 
     private void jd_principalWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowOpened
@@ -671,6 +693,18 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
         jt_buzon.setModel(modelo);
     }//GEN-LAST:event_jd_buzonWindowOpened
+
+    private void jd_llamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowOpened
+        tiempoLlamada.contadorRelojLlamada(this.jl_tiempoLlamada);
+    }//GEN-LAST:event_jd_llamadaWindowOpened
+
+    private void jd_llamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowClosing
+        tiempoLlamada.cancel();
+    }//GEN-LAST:event_jd_llamadaWindowClosing
+
+    private void jd_videollamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowClosing
+        tiempoVideollamada.cancel();
+    }//GEN-LAST:event_jd_videollamadaWindowClosing
 
     /**
      * @param args the command line arguments
@@ -782,6 +816,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_telefono;
     private javax.swing.JDialog jd_videollamada;
     private javax.swing.JLabel jl_labelWebcam;
+    private javax.swing.JLabel jl_tiempoLlamada;
+    private javax.swing.JLabel jl_tiempoVideollamada;
     private javax.swing.JTable jt_bitacora;
     private javax.swing.JTable jt_buzon;
     private javax.swing.JTable jt_contactos;
@@ -802,6 +838,8 @@ public class Principal extends javax.swing.JFrame {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     String nombreBuscar, apellidoBuscar;
     ArrayList listaCambio = new ArrayList();
+    HiloTimer tiempoLlamada = new HiloTimer(this.jl_tiempoLlamada);
+    HiloTimer tiempoVideollamada = new HiloTimer(this.jl_tiempoVideollamada);
     
     public void conectarBaseDatos() {
         try {
