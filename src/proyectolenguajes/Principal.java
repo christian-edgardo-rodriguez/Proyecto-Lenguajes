@@ -7,6 +7,9 @@ package proyectolenguajes;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,8 +19,12 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -63,6 +70,8 @@ public class Principal extends javax.swing.JFrame {
         tf_apellido = new javax.swing.JTextField();
         tf_mail = new javax.swing.JTextField();
         cb_genero = new javax.swing.JComboBox();
+        jLabel41 = new javax.swing.JLabel();
+        jl_ponerFoto = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -101,7 +110,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_mensaje = new javax.swing.JTextArea();
         jLabel35 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jd_videollamada = new javax.swing.JDialog();
@@ -117,14 +125,10 @@ public class Principal extends javax.swing.JFrame {
         jt_buzon = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jd_marcando = new javax.swing.JDialog();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
         jd_llamada = new javax.swing.JDialog();
-        jTextField3 = new javax.swing.JTextField();
+        jt_numeroLlamada = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
         jl_tiempoLlamada = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
@@ -172,19 +176,31 @@ public class Principal extends javax.swing.JFrame {
         jd_crear.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
 
         jLabel8.setText("Apellido");
-        jd_crear.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
+        jd_crear.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
 
         jLabel9.setText("E-Mail");
-        jd_crear.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
+        jd_crear.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, -1, -1));
 
         jLabel10.setText("Genero");
-        jd_crear.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, -1, -1));
+        jd_crear.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, -1, -1));
         jd_crear.getContentPane().add(tf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, -1));
-        jd_crear.getContentPane().add(tf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 150, -1));
-        jd_crear.getContentPane().add(tf_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 150, -1));
+        jd_crear.getContentPane().add(tf_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 150, -1));
+        jd_crear.getContentPane().add(tf_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, 150, -1));
 
         cb_genero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "F", "M" }));
-        jd_crear.getContentPane().add(cb_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 150, -1));
+        jd_crear.getContentPane().add(cb_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 150, -1));
+
+        jLabel41.setText("Foto");
+        jd_crear.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 580, -1, -1));
+
+        jl_ponerFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/name-iloveimg-resized-iloveimg-resized.png"))); // NOI18N
+        jl_ponerFoto.setPreferredSize(new java.awt.Dimension(60, 60));
+        jl_ponerFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_ponerFotoMouseClicked(evt);
+            }
+        });
+        jd_crear.getContentPane().add(jl_ponerFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 560, 100, 70));
 
         jButton3.setText("Crear");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -243,12 +259,12 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Número", "Nombre", "Apellido", "E-Mail", "Genero"
+                "Número", "Nombre", "Apellido", "E-Mail", "Genero", "Foto (Ruta)"
             }
         ));
         jScrollPane1.setViewportView(jt_contactos);
 
-        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 360, 90));
+        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 360, 180));
 
         jt_bitacora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,7 +276,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jt_bitacora);
 
-        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, 90));
+        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 360, 230));
 
         jTextField1.setEditable(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -270,7 +286,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField2.setEditable(false);
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setText("Bitacora");
-        jd_bitacora.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 90, -1));
+        jd_bitacora.getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 90, -1));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_bitacora.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -318,14 +334,6 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 140, 150));
-
-        jButton4.setText("Mandar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jd_mensaje.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -399,20 +407,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_buzon.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jd_marcando.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/verde.PNG"))); // NOI18N
-        jd_marcando.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 60));
-
-        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
-        jd_marcando.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
-
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170317-152653-iloveimg-resized.png"))); // NOI18N
-        jd_marcando.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
-
-        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
-        jd_marcando.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         jd_llamada.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 jd_llamadaWindowClosing(evt);
@@ -423,18 +417,21 @@ public class Principal extends javax.swing.JFrame {
         });
         jd_llamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField3.setBackground(new java.awt.Color(102, 255, 102));
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jd_llamada.getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 170, 70));
+        jt_numeroLlamada.setBackground(new java.awt.Color(102, 255, 102));
+        jt_numeroLlamada.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jt_numeroLlamada.setForeground(new java.awt.Color(255, 255, 255));
+        jt_numeroLlamada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jd_llamada.getContentPane().add(jt_numeroLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 170, 70));
 
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
-        jd_llamada.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
+        jd_llamada.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 200, 20));
+
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/largo.PNG"))); // NOI18N
+        jd_llamada.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 74, 200, 20));
 
         jl_tiempoLlamada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jl_tiempoLlamada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jd_llamada.getContentPane().add(jl_tiempoLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 70, 20));
+        jd_llamada.getContentPane().add(jl_tiempoLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 120, 20));
 
         jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170317-152653-iloveimg-resized.png"))); // NOI18N
         jd_llamada.getContentPane().add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -502,7 +499,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (tf_usuario.getText().equalsIgnoreCase("mark") && tf_contra.getText().equalsIgnoreCase("seven")) {
+        if (tf_usuario.getText().equalsIgnoreCase("five") && tf_contra.getText().equalsIgnoreCase("seven")) {
             this.setVisible(false);
             this.jd_principal.setModal(true);
             this.jd_principal.pack();
@@ -517,7 +514,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            PreparedStatement statement = connect.prepareStatement("Insert into Contacts values (?,?,?,?,?)");
+            PreparedStatement statement = connect.prepareStatement("Insert into Contacts values (?,?,?,?,?,?)");
             int telefono = Integer.parseInt(tf_telefono.getText());
             String nombre = tf_nombre.getText();
             String apellido = tf_apellido.getText();
@@ -528,6 +525,7 @@ public class Principal extends javax.swing.JFrame {
             statement.setString(3, apellido);
             statement.setString(4, email);
             statement.setString(5, genero);
+            statement.setString(6, path.getPath());
             this.tf_telefono.setText("");
             this.tf_nombre.setText("");
             this.tf_apellido.setText("");
@@ -554,6 +552,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
         String[] columnas = new String[4];
+        nombrarTablaBitacora(columnas);
         int size = conteoParaBitacora();
         String[][] contenido = new String[size][4];
         String[] fecha = fechaBitacora();
@@ -569,20 +568,23 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
         jt_bitacora.setModel(modelo);
         
-        columnas = new String[5];
+        columnas = new String[6];
+        nombrarTablaContacto(columnas);
         size = conteoParaContactos();
-        contenido = new String[size][5];
+        contenido = new String[size][6];
         int[] numero = numeroContactos();
         String[] nombreContacto = nombreContactos();
         String[] apellidoContacto = apellidoContactos();
         String[] mail = mailContactos();
         String[] genero = generoContactos();
+        String[] foto = fotoContactos();
         for (int i = 0; i < size; i++) {
             contenido[i][0] = numero[i]+ "";
             contenido[i][1] = nombreContacto[i]+ "";
             contenido[i][2] = apellidoContacto[i]+ "";
             contenido[i][3] = mail[i]+ "";
             contenido[i][4] = genero[i]+ "";
+            contenido[i][5] = foto[i]+ "";
         }
         DefaultTableModel modelo2 = new DefaultTableModel(contenido, columnas);
         jt_contactos.setModel(modelo2);
@@ -636,9 +638,32 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jd_principalWindowClosing
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (tf_nombreBuscar.getText().equalsIgnoreCase("yo") && tf_apellidoBuscar.getText().equalsIgnoreCase("tu")) {
-            nombreBuscar = tf_nombreBuscar.getText();
-            apellidoBuscar = tf_apellidoBuscar.getText();
+        nombreBuscar = tf_nombreBuscar.getText();
+        apellidoBuscar = tf_apellidoBuscar.getText();
+        try{
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select* from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            if (rs.next()) {
+                this.jd_buscar.setVisible(false);
+                this.jd_opcionesBuscar.setModal(true);
+                this.jd_opcionesBuscar.pack();
+                this.jd_opcionesBuscar.setLocationRelativeTo(this);
+                this.jd_opcionesBuscar.setVisible(true);
+                rs = statement.executeQuery("select numero from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+                if (rs.next()) {
+                    numeroLlamada = rs.getInt(1);
+                }
+            }else {
+                JOptionPane.showMessageDialog(this, "El contacto no existe.");
+            }
+            this.tf_nombreBuscar.setText("");
+            this.tf_apellidoBuscar.setText("");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        /*if (tf_nombreBuscar.getText().equalsIgnoreCase("yo") && tf_apellidoBuscar.getText().equalsIgnoreCase("tu")) {
+            
             this.jd_buscar.setVisible(false);
             this.jd_opcionesBuscar.setModal(true);
             this.jd_opcionesBuscar.pack();
@@ -648,36 +673,12 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El contacto no existe.");
         }
         this.tf_nombreBuscar.setText("");
-        this.tf_apellidoBuscar.setText("");
+        this.tf_apellidoBuscar.setText("");*/
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            PreparedStatement statement = connect.prepareStatement("Insert into Mensaje values (?,?,?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, ta_mensaje.getText());
-            statement.setString(3, nombreBuscar);
-            statement.setString(4, apellidoBuscar);
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-            statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, "Se ha enviado un mensaje.");
-            statement.setString(3, nombreBuscar);
-            statement.setString(4, apellidoBuscar);
-            prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jd_buzonWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_buzonWindowOpened
         String[] columnas = new String[4];
+        nombrarTablaMensaje(columnas);
         int size = conteoParaMensaje();
         String[][] contenido = new String[size][4];
         String[] fecha = fechaMensaje();
@@ -696,6 +697,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jd_llamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowOpened
         tiempoLlamada.contadorRelojLlamada(this.jl_tiempoLlamada);
+        this.jt_numeroLlamada.setText(numeroLlamada+"");
     }//GEN-LAST:event_jd_llamadaWindowOpened
 
     private void jd_llamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowClosing
@@ -705,6 +707,22 @@ public class Principal extends javax.swing.JFrame {
     private void jd_videollamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowClosing
         tiempoVideollamada.cancel();
     }//GEN-LAST:event_jd_videollamadaWindowClosing
+
+    private void jl_ponerFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_ponerFotoMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        FileFilter filtro = new FileNameExtensionFilter("Imagenes", "png", "jpg", "jpeg", "gif");
+        fileChooser.setFileFilter(filtro);
+        File file;
+        int opcion = fileChooser.showOpenDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            path = file;
+            Image image = Toolkit.getDefaultToolkit().createImage(file.getPath()).getScaledInstance(100, 70, 0);
+            this.jl_ponerFoto.setIcon(new ImageIcon(image));
+        } else {
+            path = null;
+        }
+    }//GEN-LAST:event_jl_ponerFotoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -746,7 +764,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -783,11 +800,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
@@ -803,24 +818,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_bitacora;
     private javax.swing.JDialog jd_buscar;
     private javax.swing.JDialog jd_buzon;
     private javax.swing.JDialog jd_crear;
     private javax.swing.JDialog jd_llamada;
-    private javax.swing.JDialog jd_marcando;
     private javax.swing.JDialog jd_mensaje;
     private javax.swing.JDialog jd_opcionesBuscar;
     private javax.swing.JDialog jd_principal;
     private javax.swing.JDialog jd_telefono;
     private javax.swing.JDialog jd_videollamada;
     private javax.swing.JLabel jl_labelWebcam;
+    private javax.swing.JLabel jl_ponerFoto;
     private javax.swing.JLabel jl_tiempoLlamada;
     private javax.swing.JLabel jl_tiempoVideollamada;
     private javax.swing.JTable jt_bitacora;
     private javax.swing.JTable jt_buzon;
     private javax.swing.JTable jt_contactos;
+    private javax.swing.JTextField jt_numeroLlamada;
     private javax.swing.JTextArea ta_mensaje;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_apellidoBuscar;
@@ -837,9 +852,11 @@ public class Principal extends javax.swing.JFrame {
     Hilo thread;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     String nombreBuscar, apellidoBuscar;
+    int numeroLlamada;
     ArrayList listaCambio = new ArrayList();
     HiloTimer tiempoLlamada = new HiloTimer(this.jl_tiempoLlamada);
     HiloTimer tiempoVideollamada = new HiloTimer(this.jl_tiempoVideollamada);
+    File path = null;
     
     public void conectarBaseDatos() {
         try {
@@ -881,7 +898,55 @@ public class Principal extends javax.swing.JFrame {
             this.tf_apellidoBuscar.grabFocus();
         }
     }
-
+    
+    public boolean principalVisibleONo(){
+        boolean visible = false;
+        if (this.jd_principal.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
+    public boolean buscarVisibleONo(){
+        boolean visible = false;
+        if (this.jd_buscar.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
+    public boolean opcionesVisibleONo(){
+        boolean visible = false;
+        if (this.jd_opcionesBuscar.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
+    public boolean mensajeVisibleONo(){
+        boolean visible = false;
+        if (this.jd_mensaje.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
+    public boolean videoLlamadaVisibleONo(){
+        boolean visible = false;
+        if (this.jd_videollamada.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
+    public boolean llamadaVisibleONo(){
+        boolean visible = false;
+        if (this.jd_llamada.isVisible()) {
+            visible = true;
+        }
+        return visible;
+    }
+    
     public void enseñarCrear(){
         this.jd_crear.setModal(true);
         this.jd_crear.pack();
@@ -916,6 +981,35 @@ public class Principal extends javax.swing.JFrame {
         this.jd_videollamada.pack();
         this.jd_videollamada.setLocationRelativeTo(this);
         this.jd_videollamada.setVisible(true);
+    }
+    
+    public void enseñarLlamada(){
+        this.jd_llamada.setModal(true);
+        this.jd_llamada.pack();
+        this.jd_llamada.setLocationRelativeTo(this);
+        this.jd_llamada.setVisible(true);
+    }
+    
+    public void enseñarMensaje(){
+        this.jd_mensaje.setModal(true);
+        this.jd_mensaje.pack();
+        this.jd_mensaje.setLocationRelativeTo(this);
+        this.jd_mensaje.setVisible(true);
+    }
+    
+    public void cerrarVideollamada(){
+        this.jd_videollamada.setVisible(false);
+        tiempoVideollamada.cancel();
+    }
+    
+    public void cerrarLlamada(){
+        this.jd_llamada.setVisible(false);
+        tiempoLlamada.cancel();
+    }
+    
+    public void cerrarMensaje(){
+        this.jd_mensaje.setVisible(false);
+        mandarMensaje();
     }
     
     public int conteoParaBitacora() {
@@ -1116,6 +1210,23 @@ public class Principal extends javax.swing.JFrame {
         return genero;
     }
     
+    public String[] fotoContactos() {
+        String[] foto = new String[conteoParaContactos()];
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet rs;
+            rs = statement.executeQuery("select foto from Contacts;");
+            int contador = 0;
+            while (rs.next()) {
+                foto[contador] = rs.getString(1);
+                contador++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foto;
+    }
+    
     public String[] fechaMensaje() {
         String[] fecha = new String[conteoParaMensaje()];
         try {
@@ -1209,6 +1320,10 @@ public class Principal extends javax.swing.JFrame {
             while (rs.next()) {
                 lista.add(rs.getString(1));
             }
+            rs = statement.executeQuery("select foto from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
+            while (rs.next()) {
+                lista.add(rs.getString(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1218,26 +1333,27 @@ public class Principal extends javax.swing.JFrame {
     public void cambiarNumero() {
         String nuevo = JOptionPane.showInputDialog(this, "Escriba el nuevo numero", "Cambio de numero"
                 ,JOptionPane.QUESTION_MESSAGE);
-        int opcion = JOptionPane.OK_OPTION;
-        int nuevoNumero = Integer.parseInt(nuevo);
-        if (opcion == 0) {
+        if (nuevo != null) {
+            int nuevoNumero = Integer.parseInt(nuevo);
             try {
                 listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
                 String nombre = (String)listaCambio.get(1);
                 String apellido = (String)listaCambio.get(2);
                 String mail = (String)listaCambio.get(3);
                 String genero = (String)listaCambio.get(4);
+                String foto = (String)listaCambio.get(5);
                 Statement statement = connect.createStatement();
                 ResultSet rs;
                 rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                 while (rs.next()) {
                     PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
-                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                     update.setInt(1, nuevoNumero);
                     update.setString(2, nombre);
                     update.setString(3, apellido);
                     update.setString(4, mail);
                     update.setString(5, genero);
+                    update.setString(6, foto);
                     update.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Se ha cambiado el numero.");
                 }
@@ -1254,31 +1370,34 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio el numero.");
         }
     }
     
     public void cambiarNombre() {
         String nuevoNombre = JOptionPane.showInputDialog(this, "Escriba el nuevo nombre", "Cambio de nombre"
                 ,JOptionPane.QUESTION_MESSAGE);
-        int opcion = JOptionPane.OK_OPTION;
-        if (opcion == 0) {
+        if (nuevoNombre != null) {
             try {
                 listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
                 int numero = (Integer)listaCambio.get(0);
                 String apellido = (String)listaCambio.get(2);
                 String mail = (String)listaCambio.get(3);
                 String genero = (String)listaCambio.get(4);
+                String foto = (String)listaCambio.get(5);
                 Statement statement = connect.createStatement();
                 ResultSet rs;
                 rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                 while (rs.next()) {
                     PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
-                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                     update.setInt(1, numero);
                     update.setString(2, nuevoNombre);
                     update.setString(3, apellido);
                     update.setString(4, mail);
                     update.setString(5, genero);
+                    update.setString(6, foto);
                     update.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Se ha cambiado el nombre.");
                 }
@@ -1295,37 +1414,40 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio el nombre.");
         }
     }
     
     public void cambiarApellido() {
         String nuevoApellido = JOptionPane.showInputDialog(this, "Escriba el nuevo apellido", "Cambio de apellido"
                 ,JOptionPane.QUESTION_MESSAGE);
-        int opcion = JOptionPane.OK_OPTION;
-        if (opcion == 0) {
+        if (nuevoApellido != null) {
             try {
                 listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
                 int numero = (Integer)listaCambio.get(0);
                 String nombre = (String)listaCambio.get(1);
                 String mail = (String)listaCambio.get(3);
                 String genero = (String)listaCambio.get(4);
+                String foto = (String)listaCambio.get(5);
                 Statement statement = connect.createStatement();
                 ResultSet rs;
                 rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                 while (rs.next()) {
                     PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
-                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                     update.setInt(1, numero);
                     update.setString(2, nombre);
                     update.setString(3, nuevoApellido);
                     update.setString(4, mail);
                     update.setString(5, genero);
+                    update.setString(6, foto);
                     update.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Se ha cambiado el nombre.");
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado el apellido.");
                 }
                 PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
                 preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
-                preparedStatement.setString(2, "Se ha cambiado el nombre de un contacto");
+                preparedStatement.setString(2, "Se ha cambiado el apellido de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, nuevoApellido);
                 int prueba = preparedStatement.executeUpdate();
@@ -1336,31 +1458,34 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio el apellido.");
         }
     }
     
     public void cambiarMail() {
         String nuevoMail = JOptionPane.showInputDialog(this, "Escriba el nuevo email", "Cambio de email"
                 ,JOptionPane.QUESTION_MESSAGE);
-        int opcion = JOptionPane.OK_OPTION;
-        if (opcion == 0) {
+        if (nuevoMail != null) {
             try {
                 listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
                 int numero = (Integer)listaCambio.get(0);
                 String nombre = (String)listaCambio.get(1);
                 String apellido = (String)listaCambio.get(2);
                 String genero = (String)listaCambio.get(4);
+                String foto = (String)listaCambio.get(5);
                 Statement statement = connect.createStatement();
                 ResultSet rs;
                 rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                 while (rs.next()) {
                     PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
-                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                     update.setInt(1, numero);
                     update.setString(2, nombre);
                     update.setString(3, apellido);
                     update.setString(4, nuevoMail);
                     update.setString(5, genero);
+                    update.setString(6, foto);
                     update.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Se ha cambiado el email.");
                 }
@@ -1377,31 +1502,34 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio el email.");
         }
     }
     
     public void cambiarGenero() {
         String nuevoGenero = JOptionPane.showInputDialog(this, "Escriba el nuevo genero", "Cambio de genero"
                 ,JOptionPane.QUESTION_MESSAGE);
-        int opcion = JOptionPane.OK_OPTION;
-        if (opcion == 0) {
+        if (nuevoGenero != null) {
             try {
                 listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
                 int numero = (Integer)listaCambio.get(0);
                 String nombre = (String)listaCambio.get(1);
                 String apellido = (String)listaCambio.get(2);
                 String mail = (String)listaCambio.get(3);
+                String foto = (String)listaCambio.get(5);
                 Statement statement = connect.createStatement();
                 ResultSet rs;
                 rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                 while (rs.next()) {
                     PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
-                            + ", nombre = ?, apellido = ?, email = ?, genero = ?");
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
                     update.setInt(1, numero);
                     update.setString(2, nombre);
                     update.setString(3, apellido);
                     update.setString(4, mail);
                     update.setString(5, nuevoGenero);
+                    update.setString(6, foto);
                     update.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Se ha cambiado el genero.");
                 }
@@ -1418,8 +1546,62 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio el genero.");
         }
     }
+    
+    public void cambiarFoto() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileFilter filtro = new FileNameExtensionFilter("Imagenes", "png", "jpg", "jpeg", "gif");
+        fileChooser.setFileFilter(filtro);
+        File file;
+        int opcion = fileChooser.showOpenDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            path = file;
+        }
+        if (path != null) {
+            try {
+                listaCambio = listaParaCambio(nombreBuscar,apellidoBuscar);
+                int numero = (Integer)listaCambio.get(0);
+                String nombre = (String)listaCambio.get(1);
+                String apellido = (String)listaCambio.get(2);
+                String mail = (String)listaCambio.get(3);
+                String genero = (String)listaCambio.get(4);
+                Statement statement = connect.createStatement();
+                ResultSet rs;
+                rs = statement.executeQuery("select* from Contacts where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                while (rs.next()) {
+                    PreparedStatement update = connect.prepareStatement("update Contacts set numero = ?"
+                            + ", nombre = ?, apellido = ?, email = ?, genero = ?, foto = ? where nombre = '"+nombreBuscar+"'and apellido = '"+apellidoBuscar+"'");
+                    update.setInt(1, numero);
+                    update.setString(2, nombre);
+                    update.setString(3, apellido);
+                    update.setString(4, mail);
+                    update.setString(5, genero);
+                    update.setString(6, path.getPath());
+                    update.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Se ha cambiado la foto.");
+                }
+                PreparedStatement preparedStatement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+                preparedStatement.setString(1, dtf.format(LocalDateTime.now()));
+                preparedStatement.setString(2, "Se ha cambiado la foto de un contacto");
+                preparedStatement.setString(3, nombreBuscar);
+                preparedStatement.setString(4, apellidoBuscar);
+                int prueba = preparedStatement.executeUpdate();
+                if (prueba > 0) {
+                    System.out.println("Bitacora actualizada.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            this.jd_opcionesBuscar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se cambio la foto.");
+        }
+    }
+    
     public void borrarContacto(){
         int seguro = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar este contacto?");
         if (seguro == JOptionPane.YES_OPTION) {
@@ -1446,6 +1628,54 @@ public class Principal extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+        }
+    }
+    
+    public void nombrarTablaContacto(String [] columnas){
+        columnas [0] = "Numero";
+        columnas [1] = "Nombre";
+        columnas [2] = "Apellido";
+        columnas [3] = "E-mail";
+        columnas [4] = "Genero";
+        columnas [5] = "Foto (Ruta)";
+    }
+    
+    public void nombrarTablaBitacora(String [] columnas){
+        columnas [0] = "Fecha";
+        columnas [1] = "Acción";
+        columnas [2] = "Nombre";
+        columnas [3] = "Apellido";
+    }
+    
+    public void nombrarTablaMensaje(String [] columnas){
+        columnas [0] = "Fecha";
+        columnas [1] = "Mensaje";
+        columnas [2] = "Nombre";
+        columnas [3] = "Apellido";
+    }
+    
+    public void mandarMensaje(){
+        try {
+            PreparedStatement statement = connect.prepareStatement("Insert into Mensaje values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, ta_mensaje.getText());
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            int prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+            statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se ha enviado un mensaje.");
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            prueba = statement.executeUpdate();
+            if (prueba > 0) {
+                System.out.println("Bitacora actualizada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

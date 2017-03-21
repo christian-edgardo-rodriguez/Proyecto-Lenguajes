@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class HiloTimer extends TimerTask{
     private JLabel label;
     private Timer timer = new Timer();
-    private int seconds = 0;
+    private int seconds = -5;
     private int minutes = 0;
 
     public HiloTimer(JLabel label) {
@@ -25,7 +25,9 @@ public class HiloTimer extends TimerTask{
 
     public void run() {
         seconds++;
-        if (seconds < 10) {
+        if (seconds < 0) {
+            this.label.setText("Marcando...");
+        } else if (seconds < 10) {
             this.label.setText("0"+ minutes + ":0" + seconds);
         } else if (seconds < 60) {
             this.label.setText("0"+ minutes + ":" + seconds);

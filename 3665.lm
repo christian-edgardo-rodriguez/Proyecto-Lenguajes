@@ -1,0 +1,165 @@
+Language model created by QuickLM on Mon Mar 20 20:35:09 EDT 2017
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 35 sentences and 37 words
+
+\data\
+ngram 1=37
+ngram 2=70
+ngram 3=35
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-2.3222 ASHLEY -0.2218
+-2.3222 BILLY -0.2218
+-2.3222 BOX -0.2218
+-2.3222 CALL -0.2218
+-2.3222 CHANGE -0.2218
+-2.3222 EMAIL -0.2218
+-2.3222 ERASE -0.2218
+-2.3222 FIRST -0.2218
+-2.3222 FIVE -0.2218
+-2.3222 GENDER -0.2218
+-2.3222 HANG -0.2218
+-2.3222 HART -0.2218
+-2.3222 HISTORY -0.2218
+-2.3222 JASON -0.2218
+-2.3222 KIMBERLY -0.2218
+-2.3222 MARK -0.2218
+-2.3222 NAME -0.2218
+-2.3222 NEW -0.2218
+-2.3222 OLIVER -0.2218
+-2.3222 OUT -0.2218
+-2.3222 PARK -0.2218
+-2.3222 PASS -0.2218
+-2.3222 PHONE -0.2218
+-2.3222 PHOTO -0.2218
+-2.3222 SCOTT -0.2218
+-2.3222 SEARCH -0.2218
+-2.3222 SECOND -0.2218
+-2.3222 SEND -0.2218
+-2.3222 SEVEN -0.2218
+-2.3222 SURNAME -0.2218
+-2.3222 TAYLOR -0.2218
+-2.3222 TEXT -0.2218
+-2.3222 TOMMY -0.2218
+-2.3222 USER -0.2218
+-2.3222 VIDEOCALL -0.2218
+
+\2-grams:
+-1.8451 <s> ASHLEY 0.0000
+-1.8451 <s> BILLY 0.0000
+-1.8451 <s> BOX 0.0000
+-1.8451 <s> CALL 0.0000
+-1.8451 <s> CHANGE 0.0000
+-1.8451 <s> EMAIL 0.0000
+-1.8451 <s> ERASE 0.0000
+-1.8451 <s> FIRST 0.0000
+-1.8451 <s> FIVE 0.0000
+-1.8451 <s> GENDER 0.0000
+-1.8451 <s> HANG 0.0000
+-1.8451 <s> HART 0.0000
+-1.8451 <s> HISTORY 0.0000
+-1.8451 <s> JASON 0.0000
+-1.8451 <s> KIMBERLY 0.0000
+-1.8451 <s> MARK 0.0000
+-1.8451 <s> NAME 0.0000
+-1.8451 <s> NEW 0.0000
+-1.8451 <s> OLIVER 0.0000
+-1.8451 <s> OUT 0.0000
+-1.8451 <s> PARK 0.0000
+-1.8451 <s> PASS 0.0000
+-1.8451 <s> PHONE 0.0000
+-1.8451 <s> PHOTO 0.0000
+-1.8451 <s> SCOTT 0.0000
+-1.8451 <s> SEARCH 0.0000
+-1.8451 <s> SECOND 0.0000
+-1.8451 <s> SEND 0.0000
+-1.8451 <s> SEVEN 0.0000
+-1.8451 <s> SURNAME 0.0000
+-1.8451 <s> TAYLOR 0.0000
+-1.8451 <s> TEXT 0.0000
+-1.8451 <s> TOMMY 0.0000
+-1.8451 <s> USER 0.0000
+-1.8451 <s> VIDEOCALL 0.0000
+-0.3010 ASHLEY </s> -0.3010
+-0.3010 BILLY </s> -0.3010
+-0.3010 BOX </s> -0.3010
+-0.3010 CALL </s> -0.3010
+-0.3010 CHANGE </s> -0.3010
+-0.3010 EMAIL </s> -0.3010
+-0.3010 ERASE </s> -0.3010
+-0.3010 FIRST </s> -0.3010
+-0.3010 FIVE </s> -0.3010
+-0.3010 GENDER </s> -0.3010
+-0.3010 HANG </s> -0.3010
+-0.3010 HART </s> -0.3010
+-0.3010 HISTORY </s> -0.3010
+-0.3010 JASON </s> -0.3010
+-0.3010 KIMBERLY </s> -0.3010
+-0.3010 MARK </s> -0.3010
+-0.3010 NAME </s> -0.3010
+-0.3010 NEW </s> -0.3010
+-0.3010 OLIVER </s> -0.3010
+-0.3010 OUT </s> -0.3010
+-0.3010 PARK </s> -0.3010
+-0.3010 PASS </s> -0.3010
+-0.3010 PHONE </s> -0.3010
+-0.3010 PHOTO </s> -0.3010
+-0.3010 SCOTT </s> -0.3010
+-0.3010 SEARCH </s> -0.3010
+-0.3010 SECOND </s> -0.3010
+-0.3010 SEND </s> -0.3010
+-0.3010 SEVEN </s> -0.3010
+-0.3010 SURNAME </s> -0.3010
+-0.3010 TAYLOR </s> -0.3010
+-0.3010 TEXT </s> -0.3010
+-0.3010 TOMMY </s> -0.3010
+-0.3010 USER </s> -0.3010
+-0.3010 VIDEOCALL </s> -0.3010
+
+\3-grams:
+-0.3010 <s> ASHLEY </s>
+-0.3010 <s> BILLY </s>
+-0.3010 <s> BOX </s>
+-0.3010 <s> CALL </s>
+-0.3010 <s> CHANGE </s>
+-0.3010 <s> EMAIL </s>
+-0.3010 <s> ERASE </s>
+-0.3010 <s> FIRST </s>
+-0.3010 <s> FIVE </s>
+-0.3010 <s> GENDER </s>
+-0.3010 <s> HANG </s>
+-0.3010 <s> HART </s>
+-0.3010 <s> HISTORY </s>
+-0.3010 <s> JASON </s>
+-0.3010 <s> KIMBERLY </s>
+-0.3010 <s> MARK </s>
+-0.3010 <s> NAME </s>
+-0.3010 <s> NEW </s>
+-0.3010 <s> OLIVER </s>
+-0.3010 <s> OUT </s>
+-0.3010 <s> PARK </s>
+-0.3010 <s> PASS </s>
+-0.3010 <s> PHONE </s>
+-0.3010 <s> PHOTO </s>
+-0.3010 <s> SCOTT </s>
+-0.3010 <s> SEARCH </s>
+-0.3010 <s> SECOND </s>
+-0.3010 <s> SEND </s>
+-0.3010 <s> SEVEN </s>
+-0.3010 <s> SURNAME </s>
+-0.3010 <s> TAYLOR </s>
+-0.3010 <s> TEXT </s>
+-0.3010 <s> TOMMY </s>
+-0.3010 <s> USER </s>
+-0.3010 <s> VIDEOCALL </s>
+
+\end\
