@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -39,9 +40,12 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Simulador de Voz");
+        this.jl_diaActual.setText(dtf2.format(LocalDateTime.now()));
         conectarBaseDatos();
         thread = new Hilo(this);
         thread.start();
+        threadHora = new HiloHora(this.jl_horaActual);
+        threadHora.contadorReloj(this.jl_horaActual);
     }
 
     /**
@@ -77,10 +81,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jd_buscar = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        tf_apellidoBuscar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         tf_nombreBuscar = new javax.swing.JTextField();
-        tf_apellidoBuscar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -99,21 +104,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        tf_nombreBuscarOpciones = new javax.swing.JTextField();
-        tf_apellidoBuscarOpciones = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jd_telefono = new javax.swing.JDialog();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jd_mensaje = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_mensaje = new javax.swing.JTextArea();
+        jLabel46 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jd_videollamada = new javax.swing.JDialog();
         jl_tiempoVideollamada = new javax.swing.JLabel();
+        jt_numeroVideollamada = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jl_labelWebcam = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -132,11 +134,24 @@ public class Principal extends javax.swing.JFrame {
         jl_tiempoLlamada = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
+        jd_seguroLlamada = new javax.swing.JDialog();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jd_seguroVideollamada = new javax.swing.JDialog();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tf_usuario = new javax.swing.JTextField();
         tf_contra = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jl_horaActual = new javax.swing.JLabel();
+        jl_diaActual = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -145,19 +160,21 @@ public class Principal extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 jd_principalWindowClosing(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                jd_principalWindowOpened(evt);
-            }
         });
         jd_principal.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/tabla-iloveimg-resized.jpg"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/tables-512-iloveimg-resized.png"))); // NOI18N
         jd_principal.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 140, 150));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/lupa icono-iloveimg-resized.png"))); // NOI18N
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+        });
         jd_principal.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 140, 150));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contacts-iloveimg-resized.png"))); // NOI18N
         jd_principal.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, 150));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
@@ -166,6 +183,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_principal.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_crear.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_crearWindowClosing(evt);
+            }
+        });
         jd_crear.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jd_crear.getContentPane().add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 150, -1));
 
@@ -210,7 +232,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jd_crear.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, 90, 40));
 
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contactos-iloveimg-resized.png"))); // NOI18N
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/contacts-iloveimg-resized.png"))); // NOI18N
         jd_crear.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 140, 150));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
@@ -219,15 +241,53 @@ public class Principal extends javax.swing.JFrame {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_crear.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_buscar.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_buscarWindowClosing(evt);
+            }
+        });
         jd_buscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(102, 255, 204));
+
         jLabel4.setText("Nombre");
-        jd_buscar.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
+
+        tf_apellidoBuscar.setEditable(false);
 
         jLabel5.setText("Apellido");
-        jd_buscar.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
-        jd_buscar.getContentPane().add(tf_nombreBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 130, -1));
-        jd_buscar.getContentPane().add(tf_apellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 130, -1));
+
+        tf_nombreBuscar.setEditable(false);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tf_apellidoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_nombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_nombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_apellidoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(44, 44, 44))
+        );
+
+        jd_buscar.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 320, 190));
 
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +308,9 @@ public class Principal extends javax.swing.JFrame {
         jd_buscar.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_bitacora.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_bitacoraWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_bitacoraWindowOpened(evt);
             }
@@ -264,7 +327,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jt_contactos);
 
-        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 360, 180));
+        jd_bitacora.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 360, 160));
 
         jt_bitacora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,12 +339,12 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jt_bitacora);
 
-        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 360, 230));
+        jd_bitacora.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 360, 230));
 
         jTextField1.setEditable(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("Contactos");
-        jd_bitacora.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 90, -1));
+        jd_bitacora.getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 90, -1));
 
         jTextField2.setEditable(false);
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -294,21 +357,29 @@ public class Principal extends javax.swing.JFrame {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_bitacora.getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_opcionesBuscar.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_opcionesBuscarWindowClosing(evt);
+            }
+        });
         jd_opcionesBuscar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/delete-iloveimg-resized.png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 140, 150));
 
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/text message-iloveimg-resized.png"))); // NOI18N
+        jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel30MouseClicked(evt);
+            }
+        });
         jd_opcionesBuscar.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 140, 150));
 
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/telefono-iloveimg-resized.png"))); // NOI18N
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/phone-512-iloveimg-resized.png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 140, 150));
 
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/modificar-iloveimg-resized.png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 140, 150));
-        jd_opcionesBuscar.getContentPane().add(tf_nombreBuscarOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 130, -1));
-        jd_opcionesBuscar.getContentPane().add(tf_apellidoBuscarOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 130, -1));
 
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -316,14 +387,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_opcionesBuscar.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jd_telefono.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-182655-iloveimg-resized-iloveimg-resized (1).png"))); // NOI18N
-        jd_telefono.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
-
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
-        jd_telefono.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
+        jd_mensaje.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_mensajeWindowClosing(evt);
+            }
+        });
         jd_mensaje.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ta_mensaje.setColumns(20);
@@ -332,8 +400,16 @@ public class Principal extends javax.swing.JFrame {
 
         jd_mensaje.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 340, 360));
 
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mensajes-iloveimg-resized.png"))); // NOI18N
-        jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 140, 150));
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/mailbox-iloveimg-resized.png"))); // NOI18N
+        jLabel46.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel46MouseClicked(evt);
+            }
+        });
+        jd_mensaje.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 140, 150));
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/text message-iloveimg-resized.png"))); // NOI18N
+        jd_mensaje.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 140, 150));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         jd_mensaje.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -342,9 +418,6 @@ public class Principal extends javax.swing.JFrame {
         jd_mensaje.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_videollamada.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                jd_videollamadaWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_videollamadaWindowOpened(evt);
             }
@@ -353,7 +426,12 @@ public class Principal extends javax.swing.JFrame {
 
         jl_tiempoVideollamada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jl_tiempoVideollamada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jd_videollamada.getContentPane().add(jl_tiempoVideollamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 70, 20));
+        jd_videollamada.getContentPane().add(jl_tiempoVideollamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 610, 90, 20));
+
+        jt_numeroVideollamada.setEditable(false);
+        jt_numeroVideollamada.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jt_numeroVideollamada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jd_videollamada.getContentPane().add(jt_numeroVideollamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 190, 50));
 
         jl_labelWebcam.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -380,6 +458,9 @@ public class Principal extends javax.swing.JFrame {
         jd_videollamada.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_buzon.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jd_buzonWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_buzonWindowOpened(evt);
             }
@@ -408,15 +489,13 @@ public class Principal extends javax.swing.JFrame {
         jd_buzon.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jd_llamada.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                jd_llamadaWindowClosing(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 jd_llamadaWindowOpened(evt);
             }
         });
         jd_llamada.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jt_numeroLlamada.setEditable(false);
         jt_numeroLlamada.setBackground(new java.awt.Color(102, 255, 102));
         jt_numeroLlamada.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jt_numeroLlamada.setForeground(new java.awt.Color(255, 255, 255));
@@ -439,6 +518,115 @@ public class Principal extends javax.swing.JFrame {
         jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/galaxy j7-iloveimg-resized (1)-iloveimg-resized (2).png"))); // NOI18N
         jd_llamada.getContentPane().add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jd_seguroLlamada.setPreferredSize(new java.awt.Dimension(360, 125));
+
+        jLabel31.setText("¿Seguro que quiere realizar esta llamada?");
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/info-iloveimg-resized.png"))); // NOI18N
+
+        jButton4.setText("Si");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("No");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_seguroLlamadaLayout = new javax.swing.GroupLayout(jd_seguroLlamada.getContentPane());
+        jd_seguroLlamada.getContentPane().setLayout(jd_seguroLlamadaLayout);
+        jd_seguroLlamadaLayout.setHorizontalGroup(
+            jd_seguroLlamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_seguroLlamadaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jd_seguroLlamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_seguroLlamadaLayout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_seguroLlamadaLayout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addGap(45, 45, 45))))
+        );
+        jd_seguroLlamadaLayout.setVerticalGroup(
+            jd_seguroLlamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_seguroLlamadaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jd_seguroLlamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addGroup(jd_seguroLlamadaLayout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jd_seguroLlamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5))))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jd_seguroVideollamada.setPreferredSize(new java.awt.Dimension(360, 125));
+
+        jLabel42.setText("¿Seguro que quiere realizar esta videollamada?");
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/info-iloveimg-resized.png"))); // NOI18N
+
+        jButton6.setText("Si");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("No");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_seguroVideollamadaLayout = new javax.swing.GroupLayout(jd_seguroVideollamada.getContentPane());
+        jd_seguroVideollamada.getContentPane().setLayout(jd_seguroVideollamadaLayout);
+        jd_seguroVideollamadaLayout.setHorizontalGroup(
+            jd_seguroVideollamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_seguroVideollamadaLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jd_seguroVideollamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_seguroVideollamadaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(2, 2, 2)
+                        .addComponent(jButton7)
+                        .addGap(39, 39, 39))
+                    .addGroup(jd_seguroVideollamadaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))))
+        );
+        jd_seguroVideollamadaLayout.setVerticalGroup(
+            jd_seguroVideollamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_seguroVideollamadaLayout.createSequentialGroup()
+                .addGroup(jd_seguroVideollamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jd_seguroVideollamadaLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jd_seguroVideollamadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton6)
+                            .addComponent(jButton7))
+                        .addGap(26, 26, 26))
+                    .addGroup(jd_seguroVideollamadaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -447,6 +635,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setText("Usuario");
 
         jLabel3.setText("Contraseña");
+
+        tf_usuario.setEditable(false);
 
         tf_contra.setEditable(false);
 
@@ -480,6 +670,37 @@ public class Principal extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 320, 190));
+
+        jPanel4.setBackground(new java.awt.Color(102, 255, 204));
+
+        jl_horaActual.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jl_horaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jl_diaActual.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jl_diaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jl_horaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jl_diaActual, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jl_horaActual, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jl_diaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 160, 150));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectolenguajes/Screenshot_20170312-131549.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 360, 570));
@@ -531,68 +752,30 @@ public class Principal extends javax.swing.JFrame {
             this.tf_apellido.setText("");
             this.tf_mail.setText("");
             this.cb_genero.setSelectedIndex(0);
-            int retorno = statement.executeUpdate();
-            if (retorno > 0) {
-                JOptionPane.showMessageDialog(this, "Contacto creado");
-            }
+            statement.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Contacto creado");
+            
             statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha creado un contacto.");
             statement.setString(3, nombre);
             statement.setString(4, apellido);
-            int prueba2 = statement.executeUpdate();
-            if (prueba2 > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-            this.jd_crear.dispose();
+            statement.executeUpdate();
+            this.jd_crear.setVisible(false);
+            this.jd_principal.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jd_bitacoraWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowOpened
-        String[] columnas = new String[4];
-        nombrarTablaBitacora(columnas);
-        int size = conteoParaBitacora();
-        String[][] contenido = new String[size][4];
-        String[] fecha = fechaBitacora();
-        String[] accion = accionBitacora();
-        String[] nombre = nombreBitacora();
-        String[] apellido = apellidoBitacora();
-        for (int i = 0; i < size; i++) {
-            contenido[i][0] = fecha[i]+ "";
-            contenido[i][1] = accion[i]+ "";
-            contenido[i][2] = nombre[i]+ "";
-            contenido[i][3] = apellido[i]+ "";
-        }
-        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
-        jt_bitacora.setModel(modelo);
-        
-        columnas = new String[6];
-        nombrarTablaContacto(columnas);
-        size = conteoParaContactos();
-        contenido = new String[size][6];
-        int[] numero = numeroContactos();
-        String[] nombreContacto = nombreContactos();
-        String[] apellidoContacto = apellidoContactos();
-        String[] mail = mailContactos();
-        String[] genero = generoContactos();
-        String[] foto = fotoContactos();
-        for (int i = 0; i < size; i++) {
-            contenido[i][0] = numero[i]+ "";
-            contenido[i][1] = nombreContacto[i]+ "";
-            contenido[i][2] = apellidoContacto[i]+ "";
-            contenido[i][3] = mail[i]+ "";
-            contenido[i][4] = genero[i]+ "";
-            contenido[i][5] = foto[i]+ "";
-        }
-        DefaultTableModel modelo2 = new DefaultTableModel(contenido, columnas);
-        jt_contactos.setModel(modelo2);
+        actualizarBitacora(jt_bitacora);
+        actualizarContacto(jt_contactos);        
     }//GEN-LAST:event_jd_bitacoraWindowOpened
 
     private void jd_videollamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowOpened
         try {
-            Webcam webcam = Webcam.getDefault();
+            webcam = Webcam.getDefault();
             WebcamPanel panel = new WebcamPanel(webcam);
             panel.setFPSDisplayed(true);
             panel.setFillArea(true);
@@ -604,36 +787,7 @@ public class Principal extends javax.swing.JFrame {
         tiempoVideollamada.contadorRelojLlamada(this.jl_tiempoVideollamada);
     }//GEN-LAST:event_jd_videollamadaWindowOpened
 
-    private void jd_principalWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowOpened
-        try {
-            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, "Se ha abierto el simulador");
-            statement.setString(3, "NULL");
-            statement.setString(4, "NULL");
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jd_principalWindowOpened
-
     private void jd_principalWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_principalWindowClosing
-        try {
-            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
-            statement.setString(1, dtf.format(LocalDateTime.now()));
-            statement.setString(2, "Se ha cerrado el simulador");
-            statement.setString(3, "NULL");
-            statement.setString(4, "NULL");
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         this.setVisible(true);
     }//GEN-LAST:event_jd_principalWindowClosing
 
@@ -645,15 +799,13 @@ public class Principal extends javax.swing.JFrame {
             ResultSet rs;
             rs = statement.executeQuery("select* from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
             if (rs.next()) {
+                this.jt_numeroLlamada.setText(rs.getInt(1)+"");
+                this.jt_numeroVideollamada.setText(rs.getInt(1)+"");
                 this.jd_buscar.setVisible(false);
                 this.jd_opcionesBuscar.setModal(true);
                 this.jd_opcionesBuscar.pack();
                 this.jd_opcionesBuscar.setLocationRelativeTo(this);
                 this.jd_opcionesBuscar.setVisible(true);
-                rs = statement.executeQuery("select numero from Contacts where nombre = '" + nombreBuscar + "'and apellido = '" + apellidoBuscar + "'");
-                if (rs.next()) {
-                    numeroLlamada = rs.getInt(1);
-                }
             }else {
                 JOptionPane.showMessageDialog(this, "El contacto no existe.");
             }
@@ -662,51 +814,15 @@ public class Principal extends javax.swing.JFrame {
         }catch(SQLException e){
             e.printStackTrace();
         }
-        /*if (tf_nombreBuscar.getText().equalsIgnoreCase("yo") && tf_apellidoBuscar.getText().equalsIgnoreCase("tu")) {
-            
-            this.jd_buscar.setVisible(false);
-            this.jd_opcionesBuscar.setModal(true);
-            this.jd_opcionesBuscar.pack();
-            this.jd_opcionesBuscar.setLocationRelativeTo(this);
-            this.jd_opcionesBuscar.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this, "El contacto no existe.");
-        }
-        this.tf_nombreBuscar.setText("");
-        this.tf_apellidoBuscar.setText("");*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jd_buzonWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_buzonWindowOpened
-        String[] columnas = new String[4];
-        nombrarTablaMensaje(columnas);
-        int size = conteoParaMensaje();
-        String[][] contenido = new String[size][4];
-        String[] fecha = fechaMensaje();
-        String[] mensaje = mensajeMensaje();
-        String[] nombre = nombreMensaje();
-        String[] apellido = apellidoMensaje();
-        for (int i = 0; i < size; i++) {
-            contenido[i][0] = fecha[i]+ "";
-            contenido[i][1] = mensaje[i]+ "";
-            contenido[i][2] = nombre[i]+ "";
-            contenido[i][3] = apellido[i]+ "";
-        }
-        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
-        jt_buzon.setModel(modelo);
+        actualizarMensaje(jt_buzon);
     }//GEN-LAST:event_jd_buzonWindowOpened
 
     private void jd_llamadaWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowOpened
         tiempoLlamada.contadorRelojLlamada(this.jl_tiempoLlamada);
-        this.jt_numeroLlamada.setText(numeroLlamada+"");
     }//GEN-LAST:event_jd_llamadaWindowOpened
-
-    private void jd_llamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_llamadaWindowClosing
-        tiempoLlamada.cancel();
-    }//GEN-LAST:event_jd_llamadaWindowClosing
-
-    private void jd_videollamadaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_videollamadaWindowClosing
-        tiempoVideollamada.cancel();
-    }//GEN-LAST:event_jd_videollamadaWindowClosing
 
     private void jl_ponerFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_ponerFotoMouseClicked
         JFileChooser fileChooser = new JFileChooser();
@@ -723,6 +839,68 @@ public class Principal extends javax.swing.JFrame {
             path = null;
         }
     }//GEN-LAST:event_jl_ponerFotoMouseClicked
+
+    private void jd_crearWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_crearWindowClosing
+        this.jd_crear.dispose();
+        this.jd_principal.setVisible(true);
+    }//GEN-LAST:event_jd_crearWindowClosing
+
+    private void jd_buscarWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_buscarWindowClosing
+        this.jd_buscar.dispose();
+        this.jd_principal.setVisible(true);
+    }//GEN-LAST:event_jd_buscarWindowClosing
+
+    private void jd_bitacoraWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_bitacoraWindowClosing
+        this.jd_bitacora.dispose();
+        this.jd_principal.setVisible(true);
+    }//GEN-LAST:event_jd_bitacoraWindowClosing
+
+    private void jd_buzonWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_buzonWindowClosing
+        this.jd_buzon.dispose();
+        this.jd_mensaje.setVisible(true);
+    }//GEN-LAST:event_jd_buzonWindowClosing
+
+    private void jd_opcionesBuscarWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_opcionesBuscarWindowClosing
+        this.jd_opcionesBuscar.setVisible(false);
+        this.jd_buscar.setVisible(true);
+    }//GEN-LAST:event_jd_opcionesBuscarWindowClosing
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        enseñarBuscar();
+    }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
+        enseñarMensaje();
+    }//GEN-LAST:event_jLabel30MouseClicked
+
+    private void jLabel46MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel46MouseClicked
+        enseñarBuzon();
+    }//GEN-LAST:event_jLabel46MouseClicked
+
+    private void jd_mensajeWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_mensajeWindowClosing
+        this.jd_mensaje.setVisible(false);
+        this.jd_principal.setVisible(true);
+    }//GEN-LAST:event_jd_mensajeWindowClosing
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.jd_seguroLlamada.dispose();
+        this.enseñarLlamada();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.jd_seguroVideollamada.dispose();
+        this.enseñarVideollamada();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JOptionPane.showMessageDialog(this, "No se realizara la llamada.");
+        this.jd_seguroLlamada.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        JOptionPane.showMessageDialog(this, "No se realizara la videollamada.");
+        this.jd_seguroVideollamada.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,6 +942,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -800,9 +982,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
@@ -812,6 +997,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -826,8 +1013,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_mensaje;
     private javax.swing.JDialog jd_opcionesBuscar;
     private javax.swing.JDialog jd_principal;
-    private javax.swing.JDialog jd_telefono;
+    private javax.swing.JDialog jd_seguroLlamada;
+    private javax.swing.JDialog jd_seguroVideollamada;
     private javax.swing.JDialog jd_videollamada;
+    private javax.swing.JLabel jl_diaActual;
+    private javax.swing.JLabel jl_horaActual;
     private javax.swing.JLabel jl_labelWebcam;
     private javax.swing.JLabel jl_ponerFoto;
     private javax.swing.JLabel jl_tiempoLlamada;
@@ -836,27 +1026,28 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_buzon;
     private javax.swing.JTable jt_contactos;
     private javax.swing.JTextField jt_numeroLlamada;
+    private javax.swing.JTextField jt_numeroVideollamada;
     private javax.swing.JTextArea ta_mensaje;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_apellidoBuscar;
-    private javax.swing.JTextField tf_apellidoBuscarOpciones;
     private javax.swing.JTextField tf_contra;
     private javax.swing.JTextField tf_mail;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nombreBuscar;
-    private javax.swing.JTextField tf_nombreBuscarOpciones;
     private javax.swing.JTextField tf_telefono;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
     Connection connect;
     Hilo thread;
+    HiloHora threadHora;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     String nombreBuscar, apellidoBuscar;
-    int numeroLlamada;
     ArrayList listaCambio = new ArrayList();
     HiloTimer tiempoLlamada = new HiloTimer(this.jl_tiempoLlamada);
     HiloTimer tiempoVideollamada = new HiloTimer(this.jl_tiempoVideollamada);
     File path = null;
+    Webcam webcam;
     
     public void conectarBaseDatos() {
         try {
@@ -887,14 +1078,20 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+    public void buscarTextField(String nombre) {
+        if (this.jd_buscar.getFocusOwner() instanceof JTextField) {
+            ((JTextField)this.jd_buscar.getFocusOwner()).setText(nombre);
+        }
+    }
+    
     public void nombreBuscarTextField() {
-        if (this.isVisible() && !this.tf_nombreBuscar.isFocusOwner()) {
+        if (this.jd_buscar.isVisible() && !this.tf_nombreBuscar.isFocusOwner()) {
             this.tf_nombreBuscar.grabFocus();
         }
     }
 
     public void apellidoBuscarTextField() {
-        if (this.isVisible() && !this.tf_apellidoBuscar.isFocusOwner()) {
+        if (this.jd_buscar.isVisible() && !this.tf_apellidoBuscar.isFocusOwner()) {
             this.tf_apellidoBuscar.grabFocus();
         }
     }
@@ -948,6 +1145,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarCrear(){
+        this.jd_principal.setVisible(false);
         this.jd_crear.setModal(true);
         this.jd_crear.pack();
         this.jd_crear.setLocationRelativeTo(this);
@@ -955,6 +1153,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarBitacora(){
+        this.jd_principal.setVisible(false);
         this.jd_bitacora.setModal(true);
         this.jd_bitacora.pack();
         this.jd_bitacora.setLocationRelativeTo(this);
@@ -962,6 +1161,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarBuscar(){
+        this.jd_principal.setVisible(false);
         this.jd_buscar.setModal(true);
         this.jd_buscar.pack();
         this.jd_buscar.setLocationRelativeTo(this);
@@ -969,7 +1169,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarBuzon(){
-        this.jd_opcionesBuscar.setVisible(false);
+        this.jd_mensaje.setVisible(false);
         this.jd_buzon.setModal(true);
         this.jd_buzon.pack();
         this.jd_buzon.setLocationRelativeTo(this);
@@ -977,6 +1177,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarVideollamada(){
+        this.jd_opcionesBuscar.setVisible(false);
         this.jd_videollamada.setModal(true);
         this.jd_videollamada.pack();
         this.jd_videollamada.setLocationRelativeTo(this);
@@ -984,6 +1185,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarLlamada(){
+        this.jd_opcionesBuscar.setVisible(false);
         this.jd_llamada.setModal(true);
         this.jd_llamada.pack();
         this.jd_llamada.setLocationRelativeTo(this);
@@ -991,6 +1193,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void enseñarMensaje(){
+        this.jd_opcionesBuscar.setVisible(false);
         this.jd_mensaje.setModal(true);
         this.jd_mensaje.pack();
         this.jd_mensaje.setLocationRelativeTo(this);
@@ -998,18 +1201,41 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void cerrarVideollamada(){
-        this.jd_videollamada.setVisible(false);
+        try{
+            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se realizó una videollamada que duró ."+this.jl_tiempoVideollamada.getText());
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        webcam.close();
+        this.jd_videollamada.dispose();
         tiempoVideollamada.cancel();
+        this.jd_principal.setVisible(true);
     }
     
     public void cerrarLlamada(){
-        this.jd_llamada.setVisible(false);
+        try{
+            PreparedStatement statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
+            statement.setString(1, dtf.format(LocalDateTime.now()));
+            statement.setString(2, "Se realizó una llamada que duró ."+this.jl_tiempoLlamada.getText());
+            statement.setString(3, nombreBuscar);
+            statement.setString(4, apellidoBuscar);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        this.jd_llamada.dispose();
         tiempoLlamada.cancel();
+        this.jd_principal.setVisible(true);
     }
     
     public void cerrarMensaje(){
         this.jd_mensaje.setVisible(false);
-        mandarMensaje();
+        this.jd_principal.setVisible(true);
     }
     
     public int conteoParaBitacora() {
@@ -1362,14 +1588,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado el numero de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio el numero.");
         }
@@ -1406,14 +1630,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado el nombre de un contacto");
                 preparedStatement.setString(3, nuevoNombre);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio el nombre.");
         }
@@ -1450,14 +1672,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado el apellido de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, nuevoApellido);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio el apellido.");
         }
@@ -1494,14 +1714,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado el email de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio el email.");
         }
@@ -1538,14 +1756,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado el genero de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio el genero.");
         }
@@ -1589,14 +1805,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha cambiado la foto de un contacto");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "No se cambio la foto.");
         }
@@ -1620,14 +1834,12 @@ public class Principal extends javax.swing.JFrame {
                 preparedStatement.setString(2, "Se ha borrado un contacto.");
                 preparedStatement.setString(3, nombreBuscar);
                 preparedStatement.setString(4, apellidoBuscar);
-                int prueba = preparedStatement.executeUpdate();
-                if (prueba > 0) {
-                    System.out.println("Bitacora actualizada.");
-                }
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             this.jd_opcionesBuscar.setVisible(false);
+            this.jd_principal.setVisible(true);
         }
     }
     
@@ -1661,21 +1873,94 @@ public class Principal extends javax.swing.JFrame {
             statement.setString(2, ta_mensaje.getText());
             statement.setString(3, nombreBuscar);
             statement.setString(4, apellidoBuscar);
-            int prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
+            statement.executeUpdate();
+            
             statement = connect.prepareStatement("Insert into Bitacora values (?,?,?,?)");
             statement.setString(1, dtf.format(LocalDateTime.now()));
             statement.setString(2, "Se ha enviado un mensaje.");
             statement.setString(3, nombreBuscar);
             statement.setString(4, apellidoBuscar);
-            prueba = statement.executeUpdate();
-            if (prueba > 0) {
-                System.out.println("Bitacora actualizada.");
-            }
+            statement.executeUpdate();
+            
+            this.ta_mensaje.setText("");
+            actualizarMensaje(jt_buzon);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void actualizarBitacora(JTable jt_bitacora){
+        String[] columnas = new String[4];
+        nombrarTablaBitacora(columnas);
+        int size = conteoParaBitacora();
+        String[][] contenido = new String[size][4];
+        String[] fecha = fechaBitacora();
+        String[] accion = accionBitacora();
+        String[] nombre = nombreBitacora();
+        String[] apellido = apellidoBitacora();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = fecha[i]+ "";
+            contenido[i][1] = accion[i]+ "";
+            contenido[i][2] = nombre[i]+ "";
+            contenido[i][3] = apellido[i]+ "";
+        }
+        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
+        jt_bitacora.setModel(modelo);
+    }
+    
+    public void actualizarContacto(JTable jt_contactos){
+        String [] columnas = new String[6];
+        nombrarTablaContacto(columnas);
+        int size = conteoParaContactos();
+        String [][] contenido = new String[size][6];
+        int[] numero = numeroContactos();
+        String[] nombreContacto = nombreContactos();
+        String[] apellidoContacto = apellidoContactos();
+        String[] mail = mailContactos();
+        String[] genero = generoContactos();
+        String[] foto = fotoContactos();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = numero[i]+ "";
+            contenido[i][1] = nombreContacto[i]+ "";
+            contenido[i][2] = apellidoContacto[i]+ "";
+            contenido[i][3] = mail[i]+ "";
+            contenido[i][4] = genero[i]+ "";
+            contenido[i][5] = foto[i]+ "";
+        }
+        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
+        jt_contactos.setModel(modelo);
+    }
+    
+    public void actualizarMensaje(JTable jt_buzon){
+        String[] columnas = new String[4];
+        nombrarTablaMensaje(columnas);
+        int size = conteoParaMensaje();
+        String[][] contenido = new String[size][4];
+        String[] fecha = fechaMensaje();
+        String[] mensaje = mensajeMensaje();
+        String[] nombre = nombreMensaje();
+        String[] apellido = apellidoMensaje();
+        for (int i = 0; i < size; i++) {
+            contenido[i][0] = fecha[i]+ "";
+            contenido[i][1] = mensaje[i]+ "";
+            contenido[i][2] = nombre[i]+ "";
+            contenido[i][3] = apellido[i]+ "";
+        }
+        DefaultTableModel modelo = new DefaultTableModel(contenido, columnas);
+        jt_buzon.setModel(modelo);
+    }
+    
+    public void seguroLlamada(){
+        this.jd_seguroLlamada.setModal(true);
+        this.jd_seguroLlamada.pack();
+        this.jd_seguroLlamada.setLocationRelativeTo(this);
+        this.jd_seguroLlamada.setVisible(true);
+    }
+    
+    public void seguroVideoLlamada(){
+        this.jd_seguroVideollamada.setModal(true);
+        this.jd_seguroVideollamada.pack();
+        this.jd_seguroVideollamada.setLocationRelativeTo(this);
+        this.jd_seguroVideollamada.setVisible(true);
     }
 }

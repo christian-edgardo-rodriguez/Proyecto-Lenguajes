@@ -23,8 +23,8 @@ public class Hilo extends Thread {
         try {
             Configuration configuration = new Configuration();
             configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
-            configuration.setDictionaryPath("./3665.dic");
-            configuration.setLanguageModelPath("./3665.lm");
+            configuration.setDictionaryPath("./5213.dic");
+            configuration.setLanguageModelPath("./5213.lm");
             LiveSpeechRecognizer recognize = new LiveSpeechRecognizer(configuration);
             recognize.startRecognition(true);
             SpeechResult result;
@@ -35,7 +35,7 @@ public class Hilo extends Thread {
                         principal.usuarioTextField();
                         System.out.println("USUARIO");
                     }   
-                } else if (command.equalsIgnoreCase("pass")) {
+                } else if (command.equalsIgnoreCase("change")) {
                     if (principal.isVisible()) {
                         principal.contraTextField();
                         System.out.println("PASSWORD");
@@ -52,7 +52,7 @@ public class Hilo extends Thread {
                         ||command.equalsIgnoreCase("scott")||command.equalsIgnoreCase("taylor")
                         ||command.equalsIgnoreCase("tommy")) {
                     if (principal.buscarVisibleONo() == true) {
-                        principal.nombreTextField(command);
+                        principal.buscarTextField(command.toLowerCase());
                         System.out.println("PONER NOMBRE O APELLIDO BUSCAR");
                     }                  
                 } else if (command.equalsIgnoreCase("first")) {
@@ -60,7 +60,7 @@ public class Hilo extends Thread {
                         principal.nombreBuscarTextField();
                         System.out.println("BUSCAR NOMBRE");
                     }                  
-                } else if (command.equalsIgnoreCase("second")) {
+                } else if (command.equalsIgnoreCase("search")) {
                     if (principal.buscarVisibleONo() == true) {
                         principal.apellidoBuscarTextField();
                         System.out.println("BUSCAR APELLIDO");
@@ -70,23 +70,14 @@ public class Hilo extends Thread {
                         principal.enseñarCrear();
                         System.out.println("NUEVO");
                     }                   
-                } else if (command.equalsIgnoreCase("history")) {
+                } else if (command.equalsIgnoreCase("table")) {
                     if (principal.principalVisibleONo() == true) {
                         principal.enseñarBitacora();
                         System.out.println("BITACORA");
                     }                   
-                } else if (command.equalsIgnoreCase("search")) {
-                    if (principal.principalVisibleONo() == true) {
-                        principal.enseñarBuscar();
-                        System.out.println("BUSCAR");
-                    } 
-                } else if (command.equalsIgnoreCase("box")) {
-                    if (principal.mensajeVisibleONo() == true) {
-                        principal.enseñarBuzon();
-                        System.out.println("BUZON");
-                    }                  
                 } else if (command.equalsIgnoreCase("send")) {
                     if (principal.mensajeVisibleONo() == true) {
+                        principal.mandarMensaje();
                         principal.cerrarMensaje();
                         System.out.println("MANDAR");
                     }                
@@ -127,19 +118,14 @@ public class Hilo extends Thread {
                     }                 
                 } else if (command.equalsIgnoreCase("call")) {
                     if (principal.opcionesVisibleONo() == true) {
-                        principal.enseñarLlamada();
+                        principal.seguroLlamada();
                         System.out.println("LLAMAR");
                     }  
                 } else if (command.equalsIgnoreCase("videocall")) {
                     if (principal.opcionesVisibleONo() == true) {
-                        principal.enseñarVideollamada();
+                        principal.seguroVideoLlamada();
                         System.out.println("VIDEOLLAMADA");
                     } 
-                } else if (command.equalsIgnoreCase("text")) {
-                    if (principal.opcionesVisibleONo() == true) {
-                        principal.enseñarMensaje();
-                        System.out.println("LLAMAR");
-                    }             
                 } else if (command.equalsIgnoreCase("hang")) {
                     if (principal.videoLlamadaVisibleONo() == true) {
                         principal.cerrarVideollamada();
@@ -155,6 +141,6 @@ public class Hilo extends Thread {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        } 
     }
 }
